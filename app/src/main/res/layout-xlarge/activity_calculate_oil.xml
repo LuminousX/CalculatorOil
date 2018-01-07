@@ -1,0 +1,486 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/Bg_Cal">
+
+    <RelativeLayout
+        android:id="@+id/relativeall"
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/relativeOil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="6dp">
+
+            <LinearLayout
+                android:id="@+id/linear2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="6dp"
+                    android:layout_marginRight="6dp"
+                    android:layout_marginTop="6dp"
+                    android:background="@color/Bg_Text_Cal"
+                    android:elevation="5dp"
+                    app:cardCornerRadius="5dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/Bg_Text_Cal"
+                        android:orientation="vertical">
+
+                        <Spinner
+                            android:id="@+id/spinTpye"
+                            android:layout_width="fill_parent"
+                            android:layout_height="55dp"
+                            android:layout_marginLeft="4dp"
+                            android:layout_marginRight="6dp"
+                            android:layout_marginTop="8dp"></Spinner>
+
+                        <Spinner
+                            android:id="@+id/spinType2"
+                            android:layout_width="fill_parent"
+                            android:layout_height="55dp"
+                            android:layout_marginLeft="4dp"
+                            android:layout_marginRight="6dp"
+                            android:layout_marginTop="8dp"></Spinner>
+
+                        <Spinner
+                            android:id="@+id/spinOil"
+                            android:layout_width="fill_parent"
+                            android:layout_height="55dp"
+                            android:layout_marginBottom="8dp"
+                            android:layout_marginLeft="4dp"
+                            android:layout_marginRight="6dp"
+                            android:layout_marginTop="8dp"></Spinner>
+
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="6dp"
+                    android:layout_marginRight="6dp"
+                    android:layout_marginTop="12dp"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+
+                        <RadioGroup
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true">
+
+                            <RadioButton
+                                android:id="@+id/radioTown"
+                                android:layout_width="match_parent"
+                                android:layout_height="35dp"
+                                android:buttonTint="@color/Btn_Radio"
+                                android:text="สภาวะในเมือง"
+                                android:textColor="@color/Text_Radio"
+                                android:textSize="@dimen/text_town" />
+
+                            <RadioButton
+                                android:id="@+id/radopCountrySide"
+                                android:layout_width="match_parent"
+                                android:layout_height="35dp"
+                                android:layout_marginTop="5dp"
+                                android:buttonTint="@color/Btn_Radio"
+                                android:text="สภาวะนอกเมือง"
+
+                                android:textColor="@color/Text_Radio"
+                                android:textSize="@dimen/text_town" />
+
+                            <RadioButton
+                                android:id="@+id/radioCombined"
+                                android:layout_width="match_parent"
+                                android:layout_height="35dp"
+                                android:layout_marginTop="5dp"
+                                android:buttonTint="@color/Btn_Radio"
+                                android:text="สภาวะรวม"
+                                android:textColor="@color/Text_Radio"
+                                android:textSize="@dimen/text_town" />
+
+                        </RadioGroup>
+                    </RelativeLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingLeft="10dp">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <android.support.v7.widget.CardView
+                                android:layout_width="wrap_content"
+                                android:layout_height="55dp"
+                                android:layout_margin="4dp"
+                                android:layout_weight="1"
+                                android:background="@color/edt_cal"
+                                android:backgroundTint="@color/edt_cal"
+                                app:cardCornerRadius="5dp">
+
+                                <EditText
+                                    android:id="@+id/edt_oil_price"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="2dp"
+                                    android:background="@color/edt_cal"
+                                    android:backgroundTint="@color/edt_cal"
+                                    android:gravity="center"
+                                    android:hint="ราคาน้ำมัน"
+                                    android:imeOptions="actionDone"
+                                    android:inputType="numberDecimal"
+                                    android:textSize="@dimen/text_town" />
+                            </android.support.v7.widget.CardView>
+
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="6dp">
+
+                                <ImageView
+                                    android:id="@+id/image_search_oil_price"
+                                    android:layout_width="68dp"
+                                    android:layout_height="68dp"
+                                    android:background="@drawable/ic_gas_station"
+                                    android:text="ราคาน้ำมัน" />
+                            </RelativeLayout>
+                        </LinearLayout>
+
+                        <android.support.v7.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="55dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginLeft="4dp"
+                            android:layout_marginRight="4dp"
+                            android:layout_marginTop="8dp"
+                            app:cardCornerRadius="5dp"
+                            app:cardElevation="2dp">
+
+                            <Button
+                                android:id="@+id/btncal"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@color/Bg_btn_cal"
+                                android:elevation="16dp"
+                                android:text="คำนวณ"
+                                android:textColor="@color/text_btn_cal"
+                                android:textSize="@dimen/text_town" />
+                        </android.support.v7.widget.CardView>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/relativeOil2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/relativeOil"
+            android:visibility="invisible">
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/lineardata"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="12dp"
+                android:elevation="5dp"
+                app:cardCornerRadius="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/Bg_Text_Cal"
+                    android:elevation="5dp"
+                    android:orientation="vertical"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="10dp">
+
+                    <TextView
+                        android:id="@+id/textNameCar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:textColor="@color/TextHead"
+                        android:layout_marginTop="4dp"
+                        android:textSize="@dimen/text_head_detail"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="30dp"
+                            android:layout_height="wrap_content"
+                            android:text="รุ่น"
+                            android:textColor="@color/TextShow"
+                            android:textSize="@dimen/text_detail" />
+
+                        <TextView
+                            android:id="@+id/textTypeCar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="30dp"
+                            android:textColor="@color/TextHide1"
+                            android:textSize="@dimen/text_detail" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="145dp"
+                            android:layout_height="wrap_content"
+                            android:text="สถานที่เริ่มต้น"
+                            android:textColor="@color/TextShow"
+                            android:textSize="@dimen/text_detail" />
+
+                        <TextView
+                            android:id="@+id/startTextLocation"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="30dp"
+                            android:textColor="@color/TextHide1"
+                            android:textSize="@dimen/text_detail" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="145dp"
+                            android:layout_height="wrap_content"
+                            android:text="สถานที่สิ้นสุด"
+                            android:textColor="@color/TextShow"
+                            android:textSize="@dimen/text_detail" />
+
+                        <TextView
+                            android:id="@+id/endTextLocation"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="30dp"
+                            android:textColor="@color/TextHide1"
+                            android:textSize="@dimen/text_detail" />
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="ระยะทาง"
+                            android:textColor="@color/TextShow"
+                            android:textSize="@dimen/text_detail" />
+
+                        <TextView
+                            android:id="@+id/distanceTextOil"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="@color/TextHide1"
+                            android:textSize="@dimen/text_detail" />
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="ใช้เวลา"
+                            android:textColor="@color/TextShow"
+                            android:textSize="@dimen/text_detail" />
+
+                        <TextView
+                            android:id="@+id/durationTextOil"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="@color/TextHide1"
+                            android:textSize="@dimen/text_detail" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="145dp"
+                            android:layout_height="wrap_content"
+                            android:text="ประเภทน้ำมัน"
+                            android:textColor="@color/TextShow"
+                            android:textSize="@dimen/text_detail" />
+
+                        <TextView
+                            android:id="@+id/textTypeOil"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="30dp"
+                            android:textColor="@color/TextHide1"
+                            android:textSize="@dimen/text_detail" />
+
+                        <TextView
+                            android:id="@+id/text_money_oil_baht"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="2dp"
+                            android:text=""
+                            android:textColor="@color/TextHide1"
+                            android:textSize="@dimen/text_detail" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="ใช้น้ำมัน"
+                            android:textColor="@color/TextShow"
+                            android:textSize="@dimen/text_detail" />
+
+                        <TextView
+                            android:id="@+id/calOil"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="@color/TextHide1"
+                            android:textSize="@dimen/text_detail" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="คิดเป็นเงิน"
+                            android:textColor="@color/TextShow"
+                            android:textSize="@dimen/text_detail" />
+
+                        <TextView
+                            android:id="@+id/calMoney"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="@color/TextHide1"
+                            android:textSize="@dimen/text_detail" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="70dp"
+                            android:layout_height="wrap_content"
+                            android:text="เฉลี่ย"
+                            android:textColor="@color/TextShow"
+                            android:textSize="@dimen/text_detail" />
+
+                        <TextView
+                            android:id="@+id/average"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="30dp"
+                            android:textColor="@color/TextHide1"
+                            android:textSize="@dimen/text_detail" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relative_text_save"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/GreenLight"
+            android:visibility="invisible">
+
+            <TextView
+                android:id="@+id/textSave"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="20dp"
+                android:gravity="center"
+                android:text="บันทึก"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/text_save" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+</RelativeLayout>
+
+
+
+
+

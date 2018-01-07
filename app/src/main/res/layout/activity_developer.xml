@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFE0B2"
+    tools:context="com.example.hispeed.calculatoroil.Developer">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:text="ผู้พัฒนา"
+            android:textColor="#0065ff"
+            android:textSize="@dimen/text_head_develop"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:text="ถึง"
+                android:textColor="#0065ff"
+                android:textSize="@dimen/text_email" />
+
+            <EditText
+                android:id="@+id/edt_title_gmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
+                android:backgroundTint="#FFE0B2"
+                android:maxLines="1"
+                android:textSize="@dimen/text_email" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:text="เรื่อง"
+                android:textColor="#0065ff"
+                android:textSize="@dimen/text_subject" />
+
+            <EditText
+                android:id="@+id/edt_subject_gmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
+                android:backgroundTint="#FFE0B2"
+                android:maxLines="1"
+                android:textSize="@dimen/text_subject" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/edt_text_gmail"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_margin="16dp"
+            android:background="@drawable/text"
+            android:gravity="top|left"
+            android:inputType="textMultiLine"
+            android:padding="6dp"
+            android:textSize="@dimen/text_body" />
+
+    </LinearLayout>
+
+</RelativeLayout>

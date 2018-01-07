@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeSlideUp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <LinearLayout
+                android:id="@+id/linearbtnsearch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="16dp"
+                android:orientation="vertical">
+
+                <RelativeLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/GreenLight">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <android.support.v7.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="6dp"
+                            android:layout_marginRight="6dp"
+                            android:layout_marginTop="6dp"
+                            app:cardCornerRadius="5dp"
+                            app:cardElevation="5dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+
+                                <FrameLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+
+
+                                    <EditText
+                                        android:id="@+id/editstartlocation"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="42dp"
+                                        android:layout_gravity="center_vertical"
+                                        android:backgroundTint="#FFFFFF"
+                                        android:drawablePadding="8dp"
+                                        android:hint="@string/origin"
+                                        android:inputType="text"
+                                        android:maxLines="1"
+                                        android:paddingLeft="45dp"
+                                        android:paddingRight="70dp"
+                                        android:textSize="16sp"
+                                        android:clickable="true"
+                                        android:focusableInTouchMode="true"
+                                        android:imeOptions="actionDone"/>
+
+                                    <ImageView
+                                        android:layout_width="40dp"
+                                        android:layout_height="25dp"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginLeft="5dp"
+                                        android:src="@drawable/a_word" />
+
+                                    <RelativeLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="right"
+                                        android:gravity="center">
+
+                                        <Button
+                                            android:id="@+id/btncleartextori"
+                                            android:layout_width="24dp"
+                                            android:layout_height="24dp"
+                                            android:layout_marginRight="36dp"
+                                            android:background="@drawable/ic_close_black_24dp"
+                                            android:visibility="invisible" />
+                                    </RelativeLayout>
+                                </FrameLayout>
+
+                            </LinearLayout>
+                        </android.support.v7.widget.CardView>
+
+
+                        <android.support.v7.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="6dp"
+                            android:layout_marginLeft="6dp"
+                            android:layout_marginRight="6dp"
+                            android:layout_marginTop="6dp"
+                            app:cardCornerRadius="5dp"
+                            app:cardElevation="5dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+
+                                <FrameLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+
+
+                                    <EditText
+                                        android:id="@+id/editendlocation"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="42dp"
+                                        android:layout_gravity="center_vertical"
+                                        android:backgroundTint="#FFFFFF"
+                                        android:hint="@string/destination"
+                                        android:inputType="text"
+                                        android:maxLines="1"
+                                        android:paddingLeft="45dp"
+                                        android:paddingRight="70dp"
+                                        android:textSize="16sp"
+                                        android:clickable="true"
+                                        android:focusableInTouchMode="true"
+                                        android:imeOptions="actionDone"/>
+
+                                    <ImageView
+                                        android:layout_width="40dp"
+                                        android:layout_height="23dp"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginLeft="5dp"
+                                        android:src="@drawable/b_word" />
+
+                                    <RelativeLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="right"
+                                        android:gravity="center">
+
+                                        <Button
+                                            android:id="@+id/btncleartextdes"
+                                            android:layout_width="24dp"
+                                            android:layout_height="24dp"
+                                            android:layout_marginRight="36dp"
+                                            android:background="@drawable/ic_close_black_24dp"
+                                            android:visibility="invisible" />
+
+
+                                    </RelativeLayout>
+                                </FrameLayout>
+                            </LinearLayout>
+                        </android.support.v7.widget.CardView>
+                    </LinearLayout>
+
+                    <ImageButton
+                        android:id="@+id/btn_change_editext"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginRight="26dp"
+                        android:background="@drawable/circle"
+                        android:src="@drawable/ic_swap_vert_black_24dp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/linear_btn_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/linearbtnsearch"
+                    android:background="@color/GreenLight">
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="6dp"
+                        android:layout_marginLeft="6dp"
+                        android:layout_marginRight="6dp"
+                        app:cardCornerRadius="5dp"
+                        app:cardElevation="5dp">
+
+                        <Button
+                            android:id="@+id/btnsearch"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:background="#F57F17"
+                            android:gravity="center"
+                            android:text="ค้นหา"
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
+                    </android.support.v7.widget.CardView>
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/lineardistance_time"
+                android:layout_below="@+id/linearbtnsearch">
+
+                <FrameLayout
+                    android:id="@+id/relativemap"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <com.google.android.gms.maps.MapView
+                        android:id="@+id/mapview"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+                            xmlns:tools="http://schemas.android.com/tools"
+                            android:id="@+id/fragmentmap"
+                            android:name="com.google.android.gms.maps.SupportMapFragment"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:transitionName="ImageView1"
+                            tools:context="com.example.hispeed.calculatoroil.MainActivity" />
+                    </com.google.android.gms.maps.MapView>
+                </FrameLayout>
+
+                <!--<RelativeLayout-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentRight="true">-->
+
+                <!--<android.support.design.widget.FloatingActionButton-->
+                <!--android:id="@+id/btnlocation"-->
+                <!--android:layout_width="56dp"-->
+                <!--android:layout_height="56dp"-->
+                <!--android:layout_marginBottom="16dp"-->
+                <!--android:layout_marginRight="16dp"-->
+                <!--android:layout_marginTop="16dp"-->
+                <!--android:backgroundTint="#FFFFFF"-->
+                <!--android:src="@drawable/ic_my_location_black_24dp"-->
+                <!--app:borderWidth="0dp"-->
+                <!--app:fabSize="normal" />-->
+                <!--</RelativeLayout>-->
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/lineardistance_time"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="@color/GreenLight"
+                android:layout_alignParentBottom="true"
+                android:elevation="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/texttime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="16dp"
+                    android:text="0 mins"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_duration" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="6dp"
+                    android:text="("
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_distance" />
+
+                <TextView
+                    android:id="@+id/textdistance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="2dp"
+                    android:text="0 km"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_distance" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="2dp"
+                    android:text=")"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_distance" />
+
+            </LinearLayout>
+        </RelativeLayout>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/btncalculateOil"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginRight="16dp"
+            android:backgroundTint="@color/Pink"
+            android:elevation="6dp"
+            android:src="@drawable/ic_directions_black_24dp"
+            app:borderWidth="0dp"
+            app:fabSize="normal"
+            app:layout_anchor="@+id/fragmentmap"
+            app:layout_anchorGravity="bottom|right|end" />
+
+    </android.support.design.widget.CoordinatorLayout>
+
+
+</RelativeLayout>
+
+
+
+
+
+
+

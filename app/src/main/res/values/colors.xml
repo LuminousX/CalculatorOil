@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="Pink">#FF4081</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="Green">#00FF00</color>
+    <color name="Yellow">#FFFF00</color>
+    <color name="Gold">#FFD700</color>
+    <color name="Red">#FF0000</color>
+    <color name="white">#ffffff</color>
+    <color name="Blue">#2196F3</color>
+    <color name="Black">#000000</color>
+
+    <color name="GreenLight">#00AA8D</color>
+    <color name="Greenblod">#008975</color>
+    <color name="bluelight">#e3f2fd</color>
+
+
+    <color name="TextHide">#ffffff</color>
+    <color name="TextShow">#000000</color>
+
+    <color name="TextShow1">#000000</color>
+
+
+    <color name="Btn_Radio">#707070</color>
+    <color name="Text_Radio">#072cff</color>
+
+    <color name="TextHead">#FF4081</color>
+    <color name="TextHide1">#2E7D32</color>
+   <color name="Bg_History">#C8E6C9</color>
+    <color name="Bg_Text_History">#FFE0B2</color>
+
+    <color name="Bg_Cal">#90CAF9</color>
+    <color name="Bg_Text_Cal">#d5edff</color>
+
+    <color name="Bg_btn_cal">#F06292</color>
+    <color name="text_btn_cal">#000000</color>
+
+    <color name="edt_cal">#C5E1A5</color>
+</resources>

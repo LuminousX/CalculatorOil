@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="false">
+
+    <item
+        android:drawable="@drawable/cargif_0"
+        android:duration="200" />
+    <item
+        android:drawable="@drawable/cargif_1"
+        android:duration="200" />
+    <item
+        android:drawable="@drawable/cargif_2"
+        android:duration="200" />
+    <item
+        android:drawable="@drawable/cargif_3"
+        android:duration="200" />
+</animation-list>
