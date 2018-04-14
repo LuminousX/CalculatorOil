@@ -25,7 +25,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".SplashScreen"
+            android:name=".SplashScreenActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -49,9 +49,9 @@
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyAi_PfEcw0eJR8DV0V_Mc1plgR6oQgqhYU" />
 
-        <!-- <activity android:name=".MapActivity" /> -->
-        <!-- <activity android:name=".CalculateOil" /> -->
-        <!-- <activity android:name=".History" /> -->
+        <!-- <activity android:name=".MapFragment" /> -->
+        <!-- <activity android:name=".CalculateOilFragment" /> -->
+        <!-- <activity android:name=".HistoryFragment" /> -->
         <activity
             android:name=".NavigationDrawerActivity"
             android:label="@string/title_activity_navigation_drawer"

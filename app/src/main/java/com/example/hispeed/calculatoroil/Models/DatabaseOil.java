@@ -1,4 +1,4 @@
-package com.example.hispeed.calculatoroil;
+package com.example.hispeed.calculatoroil.Models;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -33,7 +33,6 @@ public class DatabaseOil extends SQLiteOpenHelper {
         super(context, DB_NAME, null, DB_VERSION);
 
     }
-
 
     @Override
     public void onCreate(SQLiteDatabase db) {

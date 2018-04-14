@@ -20,5 +20,35 @@
 
     <string name="eco_sticker">Eco Sticker หรือป้ายข้อมูลรถยนต์ คือแผ่นป้ายที่มีการระบุข้อมูลที่เป็นข้อเท็จจริง และผลการทดสอบตามมาตรฐานที่สำคัญของรถยนต์ในด้าน \"สะอาด ประหยัด ปลอดภัย\" อันเป็นประโยชน์ต่อการพิจารณาตัดสินใจเลือกซื้อรถยนต์ของผู้บริโภค ได้แก่ ข้อมูลผู้ผลิต/ผู้นำเข้า, ข้อมูลของรถยนต์, ข้อมูลรายการอุปกรณ์ที่ติดตั้งจากโรงงาน และผลการทดสอบตามมาตรฐานอ้างอิง ได้แก่ อัตราการใช้น้ำมันใน 3 รูปแบบ (สภาวะรวม สภาวะในเมืองและสภาวะนอกเมือง), แถบแสดงอัตราการใช้น้ำมันอ้างอิงในสภาวะรวม (Combined), อัตราการปล่อยก๊าซคาร์บอกไดออกไซต์ และระบบความปลอดภัยที่จะช่วยให้ผู้ขับขี่และผู้โดยสารมีความปลอดภัยต่อการเกิดอุบัติเหตุ ทั้งนี้สามารถติดตามข่าวสารและค้นหาข้อมูลของ Eco Sticker ได้ที่  www.car.go.th </string>
 
-</resources>
 
+    <string name="text_app_name">Car Trip</string>
+
+    <string name="text_type_car">รุ่น</string>
+    <string name="text_origin">สถานที่เริ่มต้น</string>
+    <string name="text_destination">สถานที่สิ้นสุด</string>
+    <string name="text_distance">ระยะทาง</string>
+    <string name="text_time">ใช้เวลา</string>
+    <string name="text_type_oil">ประเภทน้ำมัน</string>
+    <string name="text_amount_oil">ใช้น้ำมัน</string>
+    <string name="text_spend">คิดเป็นเงิน</string>
+    <string name="text_average">เฉลี่ย</string>
+
+    <string name="text_save">บันทึก</string>
+
+    <string name="text_town">สภาวะในเมือง</string>
+    <string name="text_countryside">สภาวะนอกเมือง</string>
+    <string name="text_combine">สภาวะรวม</string>
+
+    <string name="text_search">ค้นหา</string>
+    <string name="text_price_oil">ราคาน้ำมัน</string>
+    <string name="text_calculate">คำนวณ</string>
+
+    <string name="text_develop">ผู้พัฒนา</string>
+    <string name="text_email">ถึง</string>
+    <string name="text_subject">เรื่อง</string>
+
+    <string name="text_eco_sticker">Eco Sticker</string>
+    <string name="text_btn_eco_sticker">รายละเอียด Eco Sticker</string>
+
+    <string name="text_not_found_history">ไม่มีประวัติการเดินทาง</string>
+</resources>

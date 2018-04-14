@@ -9,12 +9,12 @@
         android:id="@+id/card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="6dp"
-        app:cardBackgroundColor="#ffffff"
-        app:cardCornerRadius="5dp"
-        app:cardElevation="3dp">
+        android:layout_marginLeft="@dimen/margin_small"
+        android:layout_marginRight="@dimen/margin_small"
+        android:layout_marginTop="@dimen/margin_small"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="@dimen/margin_elevation"
+        app:cardElevation="@dimen/margin_elevation">
 
         <!--<ImageView-->
         <!--android:id="@+id/img_trash"-->
@@ -31,10 +31,7 @@
             android:layout_height="match_parent"
             android:background="@color/Bg_Text_History"
             android:orientation="vertical"
-            android:paddingBottom="14dp"
-            android:paddingLeft="14dp"
-            android:paddingRight="14dp"
-            android:paddingTop="4dp">
+            android:padding="@dimen/margin_space_text">
 
             <TextView
                 android:id="@+id/text_date"
@@ -42,84 +39,77 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
                 android:textColor="@color/TextShow1"
-                android:textSize="@dimen/text_date" />
+                android:textSize="@dimen/margin_space_text" />
 
             <TextView
                 android:id="@+id/textNameCarDB"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text=""
                 android:textColor="@color/TextHead"
-                android:textSize="@dimen/text_head_detail"
+                android:textSize="@dimen/textsize_large"
                 android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="@dimen/margin_line"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="30dp"
+                    style="@style/textCalculateHead"
+                    android:layout_width="@dimen/margin_xlarge"
                     android:layout_height="wrap_content"
-                    android:text="รุ่น"
-                    android:textColor="@color/TextShow1"
-                    android:textSize="@dimen/text_detail" />
+                    android:text="@string/text_type_car" />
 
                 <TextView
                     android:id="@+id/textTypeCarDB"
+                    style="@style/textCalculate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:textColor="@color/TextHide1"
-                    android:textSize="@dimen/text_detail" />
+                    android:layout_marginLeft="@dimen/margin_space_text" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="@dimen/margin_line"
                 android:orientation="horizontal">
 
                 <TextView
+                    style="@style/textCalculateHead"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:text="สถานที่เริ่มต้น"
-                    android:textColor="@color/TextShow1"
-                    android:textSize="@dimen/text_detail" />
+                    android:text="@string/text_origin" />
 
                 <TextView
                     android:id="@+id/startTextLocationDB"
+                    style="@style/textCalculate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:textColor="@color/TextHide1"
-                    android:textSize="@dimen/text_detail" />
+                    android:layout_marginLeft="@dimen/margin_space_text" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="@dimen/margin_line"
                 android:orientation="horizontal">
 
                 <TextView
+                    style="@style/textCalculateHead"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:text="สถานที่สิ้นสุด"
-                    android:textColor="@color/TextShow1"
-                    android:textSize="@dimen/text_detail" />
+                    android:text="@string/text_destination" />
 
                 <TextView
                     android:id="@+id/endTextLocationDB"
+                    style="@style/textCalculate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:textColor="@color/TextHide1"
-                    android:textSize="@dimen/text_detail" />
+                    android:layout_marginLeft="@dimen/margin_space_text" />
 
             </LinearLayout>
 
@@ -127,126 +117,114 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="@dimen/margin_line"
                 android:orientation="horizontal">
 
                 <TextView
+                    style="@style/textCalculateHead"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="ระยะทาง"
-                    android:textColor="@color/TextShow1"
-                    android:textSize="@dimen/text_detail" />
+                    android:text="@string/text_distance" />
 
                 <TextView
                     android:id="@+id/distanceTextOilDB"
+                    style="@style/textCalculate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textColor="@color/TextHide1"
-                    android:textSize="@dimen/text_detail" />
+                    android:layout_weight="1" />
 
 
                 <TextView
+                    style="@style/textCalculateHead"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="ใช้เวลา"
-                    android:textColor="@color/TextShow1"
-                    android:textSize="@dimen/text_detail" />
+                    android:text="@string/text_time" />
 
                 <TextView
                     android:id="@+id/durationTextOilDB"
+                    style="@style/textCalculate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textColor="@color/TextHide1"
-                    android:textSize="@dimen/text_detail" />
+                    android:layout_weight="1" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="@dimen/margin_line"
                 android:orientation="horizontal">
 
                 <TextView
+                    style="@style/textCalculateHead"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:text="ประเภทน้ำมัน"
-                    android:textColor="@color/TextShow1"
-                    android:textSize="@dimen/text_detail" />
+                    android:text="@string/text_type_oil" />
 
                 <TextView
                     android:id="@+id/textTypeOilDB"
+                    style="@style/textCalculate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:textColor="@color/TextHide1"
-                    android:textSize="@dimen/text_detail" />
+                    android:layout_marginLeft="@dimen/margin_space_text" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="@dimen/margin_line"
                 android:orientation="horizontal">
 
                 <TextView
+                    style="@style/textCalculateHead"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="ใช้น้ำมัน"
-                    android:textColor="@color/TextShow1"
-                    android:textSize="@dimen/text_detail" />
+                    android:text="@string/text_amount_oil" />
 
                 <TextView
                     android:id="@+id/calOilDB"
+                    style="@style/textCalculate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textColor="@color/TextHide1"
-                    android:textSize="@dimen/text_detail" />
+                    android:layout_weight="1" />
 
                 <TextView
+                    style="@style/textCalculateHead"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="คิดเป็นเงิน"
-                    android:textColor="@color/TextShow1"
-                    android:textSize="@dimen/text_detail" />
+                    android:text="@string/text_price_oil" />
 
                 <TextView
                     android:id="@+id/calMoneyDB"
+                    style="@style/textCalculate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textColor="@color/TextHide1"
-                    android:textSize="@dimen/text_detail" />
+                    android:layout_weight="1" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="@dimen/margin_line"
                 android:orientation="horizontal">
 
                 <TextView
+                    style="@style/textCalculateHead"
                     android:layout_width="60dp"
                     android:layout_height="wrap_content"
-                    android:text="เฉลี่ย"
-                    android:textColor="@color/TextShow1"
-                    android:textSize="@dimen/text_detail" />
+                    android:text="@string/text_average" />
 
                 <TextView
                     android:id="@+id/average_DB"
+                    style="@style/textCalculate"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/TextHide1"
-                    android:textSize="@dimen/text_detail" />
+                    android:layout_height="wrap_content" />
 
             </LinearLayout>
 

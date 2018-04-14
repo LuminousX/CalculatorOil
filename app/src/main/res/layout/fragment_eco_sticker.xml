@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F0F4C3"
-    tools:context="com.example.hispeed.calculatoroil.EcoSticker">
+    android:background="@color/GreenVeryLight"
+    tools:context="com.example.hispeed.calculatoroil.EcoStickerFragment">
 
     <LinearLayout
         android:id="@+id/linearText"
@@ -17,23 +17,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"
-            android:text="Eco Sticker"
-            android:textColor="#FF1744"
-            android:textSize="@dimen/text_head_eco_sticker"
+            android:layout_marginTop="@dimen/margin_large"
+            android:text="@string/text_eco_sticker"
+            android:textColor="@color/Red"
+            android:textSize="@dimen/textsize_header"
             android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_margin="@dimen/margin_normal"
             android:breakStrategy="high_quality"
             android:hyphenationFrequency="full"
             android:includeFontPadding="false"
-            android:lineSpacingExtra="5dp"
+            android:lineSpacingExtra="@dimen/margin_elevation"
             android:text="@string/eco_sticker"
             android:textColor="@color/Black"
-            android:textSize="@dimen/text_eco_sticker"
+            android:textSize="@dimen/textsize_normal"
             android:typeface="serif" />
 
 
@@ -44,29 +44,30 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/linearText"
         android:layout_gravity="center"
-        android:layout_marginTop="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginRight="@dimen/textsize_normal"
+        android:layout_marginTop="@dimen/margin_normal"
         android:layout_toRightOf="@+id/ImgCargif"
-        android:padding="2dp">
+        android:padding="@dimen/margin_space">
 
         <android.support.v7.widget.CardView
+            style="@style/borderStyle"
+            app:cardCornerRadius="@dimen/margin_small"
+            app:cardElevation="@dimen/margin_elevation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_margin="5dp"
-            android:background="#F57F17"
-            android:padding="5dp"
-            app:cardCornerRadius="5dp"
-            app:cardElevation="2dp">
+            android:layout_marginTop="@dimen/margin_small"
+            android:background="@color/orange"
+            android:padding="@dimen/margin_small">
 
             <Button
                 android:id="@+id/btn_eco_sticker"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#F57F17"
-                android:padding="10dp"
-                android:textSize="@dimen/text_btn_eco_sticker"
-                android:text="รายละเอียด Eco Sticker" />
+                android:background="@color/orange"
+                android:padding="@dimen/margin_small"
+                android:text="@string/text_btn_eco_sticker"
+                android:textSize="@dimen/textsize_normal" />
         </android.support.v7.widget.CardView>
     </RelativeLayout>
 
@@ -76,6 +77,6 @@
         android:layout_height="80dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_margin="26dp" />
+        android:layout_margin="@dimen/margin_large" />
 
 </RelativeLayout>

@@ -13,19 +13,24 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
-public class EcoSticker extends Fragment {
+public class EcoStickerFragment extends Fragment {
+
+    Button btn_eco_sticker;
+    ImageView imgCargif;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         getActivity().setTitle("Eco Sticker");
-        return inflater.inflate(R.layout.activity_eco_sticker, container, false);
+        return inflater.inflate(R.layout.fragment_eco_sticker, container, false);
     }
 
     @Override
     public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Button btn_eco_sticker = (Button) getActivity().findViewById(R.id.btn_eco_sticker);
+        BlindWedget();
+
         btn_eco_sticker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -34,14 +39,16 @@ public class EcoSticker extends Fragment {
             }
         });
 
-
-        ImageView imgCargif = (ImageView)getActivity().findViewById(R.id.ImgCargif);
         imgCargif.setBackgroundResource(R.drawable.cargif);
-        AnimationDrawable animationDrawable = (AnimationDrawable)imgCargif.getBackground();
+        AnimationDrawable animationDrawable = (AnimationDrawable) imgCargif.getBackground();
         animationDrawable.start();
 
     }
 
+    private void BlindWedget() {
+        btn_eco_sticker = (Button) getActivity().findViewById(R.id.btn_eco_sticker);
+        imgCargif = (ImageView) getActivity().findViewById(R.id.ImgCargif);
+    }
 
     public Intent intentEcoSticker(Context context) {
         try {
@@ -51,5 +58,4 @@ public class EcoSticker extends Fragment {
             return new Intent(Intent.ACTION_VIEW, Uri.parse("http://car.go.th"));
         }
     }
-
 }

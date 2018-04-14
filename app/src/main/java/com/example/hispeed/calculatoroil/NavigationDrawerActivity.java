@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.PersistableBundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,15 +15,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.common.api.Status;
-import com.squareup.picasso.Picasso;
 
 
 public class NavigationDrawerActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -35,7 +29,7 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
 
     ActionBarDrawerToggle toggle;
     DrawerLayout drawer;
-    MapActivity mapActivity;
+    MapFragment mapFragment;
 
 
     @Override
@@ -61,10 +55,10 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
         navigationView.setNavigationItemSelectedListener(this);
         View header = navigationView.getHeaderView(0);
 
-        mapActivity = new MapActivity();
+        mapFragment = new MapFragment();
 
         android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_continer, mapActivity);
+        fragmentTransaction.replace(R.id.fragment_continer, mapFragment);
         fragmentTransaction.commit();
 
     }
@@ -78,7 +72,7 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
             drawer.closeDrawer(GravityCompat.START);
         }
 
-        if (mapActivity.isVisible()) {
+        if (mapFragment.isVisible()) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AlertDialogStyle);
             builder.setMessage("คุณต้องการออกจากแอพพลิเคชันนี้หรือไม่?")
                     .setPositiveButton("ใช่", new DialogInterface.OnClickListener() {
@@ -112,32 +106,32 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
 
         if (id == R.id.nav_map) {
 
-            MapActivity mapActivity = new MapActivity();
+            MapFragment mapFragment = new MapFragment();
             android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.setCustomAnimations(R.anim.enter_left, R.anim.exit_right, R.anim.enter_right, R.anim.exit_left);
-            fragmentTransaction.replace(R.id.fragment_continer, mapActivity);
+            fragmentTransaction.replace(R.id.fragment_continer, mapFragment);
 //            fragmentTransaction.addToBackStack("tag");
             fragmentTransaction.commit();
         } else if (id == R.id.nav_eco_sticker) {
-            EcoSticker ecoSticker = new EcoSticker();
+            EcoStickerFragment ecoStickerFragment = new EcoStickerFragment();
             android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.setCustomAnimations(R.anim.enter_right, R.anim.exit_left, R.anim.enter_left, R.anim.exit_right);
-            fragmentTransaction.replace(R.id.fragment_continer, ecoSticker);
+            fragmentTransaction.replace(R.id.fragment_continer, ecoStickerFragment);
             fragmentTransaction.commit();
         } else if (id == R.id.nav_bookmark) {
 
-            History history = new History();
+            HistoryFragment historyFragment = new HistoryFragment();
             android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.setCustomAnimations(R.anim.enter_right, R.anim.exit_left, R.anim.enter_left, R.anim.exit_right);
-            fragmentTransaction.replace(R.id.fragment_continer, history);
+            fragmentTransaction.replace(R.id.fragment_continer, historyFragment);
             //  fragmentTransaction.addToBackStack("tag");
             fragmentTransaction.commit();
         } else if (id == R.id.nav_dev) {
 
-            Developer developer = new Developer();
+            DeveloperFragment developerFragment = new DeveloperFragment();
             android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.setCustomAnimations(R.anim.enter_right, R.anim.exit_left, R.anim.enter_left, R.anim.exit_right);
-            fragmentTransaction.replace(R.id.fragment_continer, developer);
+            fragmentTransaction.replace(R.id.fragment_continer, developerFragment);
             fragmentTransaction.commit();
         } else if (id == R.id.nav_exit) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AlertDialogStyle);

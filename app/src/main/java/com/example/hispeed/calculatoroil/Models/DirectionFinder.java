@@ -1,4 +1,4 @@
-package com.example.hispeed.calculatoroil;
+package com.example.hispeed.calculatoroil.Models;
 
 import android.os.AsyncTask;
 
@@ -150,9 +150,6 @@ public class DirectionFinder {
                     lat / 100000d, lng / 100000d
             ));
         }
-
         return decoded;
     }
-
-
 }

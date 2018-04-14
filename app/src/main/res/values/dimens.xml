@@ -6,6 +6,23 @@
     <dimen name="nav_header_height">160dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
 
+    <dimen name="textsize_small">12sp</dimen>
+    <dimen name="textsize_normal">16sp</dimen>
+    <dimen name="textsize_large">20sp</dimen>
+    <dimen name="textsize_header">24sp</dimen>
+    <dimen name="textsize_xlarge">30sp</dimen>
+
+
+    <dimen name="margin_space">2dp</dimen>
+    <dimen name="margin_elevation">4dp</dimen>
+    <dimen name="margin_small">6dp</dimen>
+    <dimen name="margin_line">8dp</dimen>
+    <dimen name="margin_space_text">10dp</dimen>
+    <dimen name="margin_normal">16dp</dimen>
+    <dimen name="margin_large">24dp</dimen>
+    <dimen name="margin_xlarge">30dp</dimen>
+
+
 
     <dimen name="text_duration">20sp</dimen>
     <dimen name="text_distance">16sp</dimen>

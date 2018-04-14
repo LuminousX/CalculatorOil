@@ -1,4 +1,6 @@
-package com.example.hispeed.calculatoroil;
+package com.example.hispeed.calculatoroil.Models;
+
+import com.example.hispeed.calculatoroil.Models.Route;
 
 import java.util.List;
 

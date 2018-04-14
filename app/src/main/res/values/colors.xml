@@ -9,19 +9,23 @@
     <color name="Gold">#FFD700</color>
     <color name="Red">#FF0000</color>
     <color name="white">#ffffff</color>
-    <color name="Blue">#2196F3</color>
+    <color name="Blue">#0065ff</color>
     <color name="Black">#000000</color>
+
+    <color name="GreenVeryLight">#F0F4C3</color>
 
     <color name="GreenLight">#00AA8D</color>
     <color name="Greenblod">#008975</color>
     <color name="bluelight">#e3f2fd</color>
 
+    <color name="orange">#F57F17</color>
 
     <color name="TextHide">#ffffff</color>
     <color name="TextShow">#000000</color>
 
     <color name="TextShow1">#000000</color>
 
+    <color name="YellowLight">#FFE0B2</color>
 
     <color name="Btn_Radio">#707070</color>
     <color name="Text_Radio">#072cff</color>

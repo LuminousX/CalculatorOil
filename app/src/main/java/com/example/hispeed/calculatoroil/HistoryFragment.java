@@ -12,44 +12,31 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 import com.example.hispeed.calculatoroil.Adapter.AdapterRecyclerView;
+import com.example.hispeed.calculatoroil.Models.DatabaseOil;
 import com.example.hispeed.calculatoroil.Models.DetailRecyclerView;
 import com.example.hispeed.calculatoroil.Models.RecyclerTouchListener;
 import com.example.hispeed.calculatoroil.ViewHolders.ClickListener;
 
 import java.util.ArrayList;
 
-public class History extends Fragment implements NavigationView.OnNavigationItemSelectedListener {
+public class HistoryFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener {
 
-    public History() {
-
+    public HistoryFragment() {
     }
 
     DatabaseOil databaseOil;
     SQLiteDatabase sqLiteDatabase;
     Cursor cursor;
 
-
-    String name;
-    String type_car;
-    String origin;
-    String destination;
-    String distance;
-    String duration;
-    String type_oil;
-    String spend_oil;
-    String money;
-    String str_date;
-    String average_baht;
-
+    String name, type_car, origin, destination, distance, duration, type_oil, spend_oil, money, str_date, average_baht;
 
     TextView text_no_history;
 
@@ -57,28 +44,24 @@ public class History extends Fragment implements NavigationView.OnNavigationItem
     AdapterRecyclerView adapterRecyclerView;
     ArrayList<DetailRecyclerView> detailRecyclerViews = new ArrayList<>();
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         getActivity().setTitle("ประวัติการเดินทาง");
-        return inflater.inflate(R.layout.activity_history, container, false);
+        return inflater.inflate(R.layout.fragment_history, container, false);
     }
-
 
     @Override
     public void onViewCreated(final View view, Bundle savedInstanceState) {
         setHasOptionsMenu(true);
         super.onViewCreated(view, savedInstanceState);
 
-        text_no_history = (TextView) getActivity().findViewById(R.id.text_no_history);
-
+        BlindWedget();
 
         databaseOil = new DatabaseOil(getActivity());
         sqLiteDatabase = databaseOil.getWritableDatabase();
 
         cursor = sqLiteDatabase.rawQuery("SELECT * FROM " + databaseOil.TABLE_NAME, null);
 
-        recyclerView = (RecyclerView) getActivity().findViewById(R.id.recyclerView_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
@@ -101,7 +84,6 @@ public class History extends Fragment implements NavigationView.OnNavigationItem
         ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
             public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-
                 return false;
             }
 
@@ -137,16 +119,14 @@ public class History extends Fragment implements NavigationView.OnNavigationItem
 
                                     cursor.requery();
                                 }
-
                                 databaseOil.close();
-                                //    retrieve();
+
                                 int position = viewHolder.getAdapterPosition();
                                 detailRecyclerViews.remove(position);
                                 adapterRecyclerView.notifyDataSetChanged();
 
                                 if (detailRecyclerViews.size() < 1) {
                                     text_no_history.setVisibility(View.VISIBLE);
-
                                 }
                             }
                         })
@@ -162,15 +142,28 @@ public class History extends Fragment implements NavigationView.OnNavigationItem
                 AlertDialog dialog = builder.create();
                 dialog.setCanceledOnTouchOutside(false);
                 dialog.show();
-
             }
         };
-
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
         itemTouchHelper.attachToRecyclerView(recyclerView);
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        sqLiteDatabase.close();
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        return false;
+    }
+
+    private void BlindWedget() {
+        text_no_history = (TextView) getActivity().findViewById(R.id.text_no_history);
+        recyclerView = (RecyclerView) getActivity().findViewById(R.id.recyclerView_list);
+    }
 
     public void retrieve() {
         DatabaseOil databaseOils = new DatabaseOil(getActivity());
@@ -183,6 +176,7 @@ public class History extends Fragment implements NavigationView.OnNavigationItem
 
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
+
             String nameRV = cursor.getString(0);
             String type_carRV = cursor.getString(1);
             String originRV = cursor.getString(2);
@@ -214,19 +208,4 @@ public class History extends Fragment implements NavigationView.OnNavigationItem
         }
 
     }
-
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        sqLiteDatabase.close();
-
-    }
-
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        return false;
-    }
-
-
 }

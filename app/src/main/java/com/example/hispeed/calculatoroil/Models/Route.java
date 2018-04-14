@@ -1,4 +1,4 @@
-package com.example.hispeed.calculatoroil;
+package com.example.hispeed.calculatoroil.Models;
 
 import com.google.android.gms.maps.model.LatLng;
 

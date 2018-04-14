@@ -7,8 +7,6 @@
     android:background="@color/Bg_History">
 
 
-
-
     <!--<ListView-->
     <!--android:id="@+id/listviewDB"-->
     <!--style="@style/Widget.AppCompat.Light.ListView.DropDown"-->
@@ -22,16 +20,13 @@
         android:layout_height="match_parent"
         android:background="@color/Bg_History" />
 
-
-
     <TextView
         android:id="@+id/text_no_history"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="ไม่มีประวัติการเดินทาง"
-        android:textSize="20sp"
+        android:text="@string/text_not_found_history"
+        android:textSize="@dimen/textsize_large"
         android:visibility="invisible" />
-
 
 </RelativeLayout>

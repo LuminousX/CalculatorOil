@@ -1,15 +1,17 @@
-package com.example.hispeed.calculatoroil;
+package com.example.hispeed.calculatoroil.Models;
 
 /**
  * Created by Hispeed on 11/6/2560.
  */
 
-public class Duration {
+public class Distance {
     public String text;
     public int value;
 
-    public Duration(String text, int value) {
+
+    public Distance(String text, int value) {
         this.text = text;
         this.value = value;
+
     }
 }

@@ -58,12 +58,6 @@ public class AdapterRecyclerView extends RecyclerView.Adapter<DetailVewHolders> 
 
     }
 
-//    public void setListContent(ArrayList<DetailRecyclerView> detailRecyclerViews) {
-//        this.detailRecyclerViews = detailRecyclerViews;
-//        notifyItemRangeChanged(0, detailRecyclerViews.size());
-//    }
-
-
     @Override
     public int getItemCount() {
         return detailRecyclerViews.size();
