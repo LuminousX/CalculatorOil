@@ -23,14 +23,12 @@ import com.google.android.gms.common.api.GoogleApiClient;
 
 public class NavigationDrawerActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-
     Toolbar toolbar = null;
     GoogleApiClient mGoogleApiClient;
 
     ActionBarDrawerToggle toggle;
     DrawerLayout drawer;
     MapFragment mapFragment;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,7 +100,6 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
 
         if (id == R.id.nav_map) {
 

@@ -90,11 +90,11 @@ public class CalculateOilFragment extends Fragment implements AdapterView.OnItem
         setHasOptionsMenu(true);
         super.onViewCreated(view, savedInstanceState);
 
-        BlindWidget();
+        bindView();
         carTypeNull();
 
-        spinType.setAdapter(ShowAdapter(detailCar.type_car));
-        spinOil.setAdapter(ShowAdapter(arrayOil));
+        spinType.setAdapter(showAdapter(detailCar.type_car));
+        spinOil.setAdapter(showAdapter(arrayOil));
 
         spinType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -111,14 +111,14 @@ public class CalculateOilFragment extends Fragment implements AdapterView.OnItem
         btncal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BtnCalClick();
+                btnCalClick();
             }
         });
 
         textsave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CheckData();
+                checkData();
             }
         });
 
@@ -141,7 +141,7 @@ public class CalculateOilFragment extends Fragment implements AdapterView.OnItem
 
     }
 
-    public void BtnCalClick() {
+    public void btnCalClick() {
         if (spinType.getSelectedItemPosition() == 0) {
             Toast.makeText(getActivity(), "กรุณาใส่ยี่ห้อรถยนต์", Toast.LENGTH_SHORT).show();
             return;
@@ -162,8 +162,8 @@ public class CalculateOilFragment extends Fragment implements AdapterView.OnItem
             return;
         } else {
 
-            relativeLayout.setAnimation(ShowAnimation(relativeLayout));
-            relative_text_save.setAnimation(ShowAnimation(relative_text_save));
+            relativeLayout.setAnimation(showAnimation(relativeLayout));
+            relative_text_save.setAnimation(showAnimation(relative_text_save));
 
             oil_price_search = Double.parseDouble(edt_oil_price.getText().toString());
 
@@ -179,7 +179,7 @@ public class CalculateOilFragment extends Fragment implements AdapterView.OnItem
             String calMoneyText = String.format("%.2f", calSpentOil);
             double calMoneyDouble = Double.parseDouble(calMoneyText);
 
-            textCalDis.setText(DecimalFormatText(distanceDouble) + " km.");
+            textCalDis.setText(decimalFormatText(distanceDouble) + " km.");
             textCalDu.setText(durationTextIntent);
             startTextLocation.setText(startLocation);
             endTextLocation.setText(endLocation);
@@ -187,7 +187,7 @@ public class CalculateOilFragment extends Fragment implements AdapterView.OnItem
             textTypeCar.setText(spinType2.getSelectedItem().toString());
             textTypeOil.setText(spinOil.getSelectedItem().toString() + " (" + oil_price_search + " บาท)");
             calOil.setText(String.format("%.2f", calAmountOil) + " L.");
-            calMoney.setText(DecimalFormatText(calMoneyDouble) + " บาท");
+            calMoney.setText(decimalFormatText(calMoneyDouble) + " บาท");
 
             average_baht.setText(String.format("%.2f", calSpentOil / distanceInDouble) + " บาท ต่อ 1 km.");
             str_average_baht = average_baht.getText().toString();
@@ -196,12 +196,12 @@ public class CalculateOilFragment extends Fragment implements AdapterView.OnItem
         }
     }
 
-    public String DecimalFormatText(double value) {
+    public String decimalFormatText(double value) {
         DecimalFormat decimalFormat = new DecimalFormat("#,###.0");
         return decimalFormat.format(value);
     }
 
-    public Animation ShowAnimation(RelativeLayout layout) {
+    public Animation showAnimation(RelativeLayout layout) {
         layout.setVisibility(View.VISIBLE);
         Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.transition_save);
         animation.reset();
@@ -209,14 +209,14 @@ public class CalculateOilFragment extends Fragment implements AdapterView.OnItem
         return animation;
     }
 
-    public ArrayAdapter<String> ShowAdapter(String[] strings) {
+    public ArrayAdapter<String> showAdapter(String[] strings) {
         ArrayAdapter<String> adapterType = new ArrayAdapter<String>(getActivity(),
                 android.R.layout.simple_spinner_item, strings);
         adapterType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         return adapterType;
     }
 
-    private void BlindWidget() {
+    private void bindView() {
         spinType = (Spinner) getActivity().findViewById(R.id.spinTpye);
         spinOil = (Spinner) getActivity().findViewById(R.id.spinOil);
         spinType2 = (Spinner) getActivity().findViewById(R.id.spinType2);
@@ -266,7 +266,7 @@ public class CalculateOilFragment extends Fragment implements AdapterView.OnItem
         }
     }
 
-    public void CheckData() {
+    public void checkData() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AlertDialogStyle);
         if (textNameCar.getText().equals("")) {
             Toast.makeText(getActivity(), "กรุณาใส่ข้อมูลให้ครบ", Toast.LENGTH_SHORT).show();
@@ -308,140 +308,139 @@ public class CalculateOilFragment extends Fragment implements AdapterView.OnItem
                 break;
 
             case 1:
-                ShowAdapterTypeCar(detailCar.bmw);
+                showAdapterTypeCar(detailCar.bmw);
                 break;
 
             case 2:
-                ShowAdapterTypeCar(detailCar.chevrolet);
+                showAdapterTypeCar(detailCar.chevrolet);
                 break;
 
             case 3:
-                ShowAdapterTypeCar(detailCar.ford);
+                showAdapterTypeCar(detailCar.ford);
                 break;
 
             case 4:
-                ShowAdapterTypeCar(detailCar.foton);
+                showAdapterTypeCar(detailCar.foton);
                 break;
 
             case 5:
-                ShowAdapterTypeCar(detailCar.honda);
+                showAdapterTypeCar(detailCar.honda);
                 break;
 
             case 6:
-                ShowAdapterTypeCar(detailCar.isuzu);
+                showAdapterTypeCar(detailCar.isuzu);
                 break;
 
             case 7:
-                ShowAdapterTypeCar(detailCar.mazda);
+                showAdapterTypeCar(detailCar.mazda);
                 break;
 
             case 8:
-                ShowAdapterTypeCar(detailCar.mercedes_benz);
+                showAdapterTypeCar(detailCar.mercedes_benz);
                 break;
 
             case 9:
-                ShowAdapterTypeCar(detailCar.mg);
+                showAdapterTypeCar(detailCar.mg);
                 break;
 
             case 10:
-                ShowAdapterTypeCar(detailCar.mini);
+                showAdapterTypeCar(detailCar.mini);
                 break;
 
             case 11:
-                ShowAdapterTypeCar(detailCar.mitsubishi);
+                showAdapterTypeCar(detailCar.mitsubishi);
                 break;
 
             case 12:
-                ShowAdapterTypeCar(detailCar.nissan);
+                showAdapterTypeCar(detailCar.nissan);
                 break;
 
             case 13:
-                ShowAdapterTypeCar(detailCar.suzuki);
-
+                showAdapterTypeCar(detailCar.suzuki);
                 break;
 
             case 14:
-                ShowAdapterTypeCar(detailCar.tata);
+                showAdapterTypeCar(detailCar.tata);
                 break;
 
             case 15:
-                ShowAdapterTypeCar(detailCar.toyota);
+                showAdapterTypeCar(detailCar.toyota);
                 break;
         }
     }
 
-    public void ShowAdapterTypeCar(String[] car) {
+    public void showAdapterTypeCar(String[] car) {
         ArrayAdapter<String> stringArrayAdapter = new ArrayAdapter<String>(getActivity(),
                 android.R.layout.simple_spinner_item, car);
         stringArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinType2.setAdapter(stringArrayAdapter);
     }
 
-    public void CheckTypeCar() {
+    public void checkTypeCar() {
         switch ((int) spinType.getSelectedItemId()) {
             case 1:
-                CheckRadioButton(detailCar.bmw_town[point], detailCar.bmw_countryside[point], detailCar.bmw_combined[point]);
+                checkRadioButton(detailCar.bmw_town[point], detailCar.bmw_countryside[point], detailCar.bmw_combined[point]);
                 break;
 
             case 2:
-                CheckRadioButton(detailCar.chevrolet_town[point], detailCar.chevrolet_countryside[point], detailCar.chevrolet_combined[point]);
+                checkRadioButton(detailCar.chevrolet_town[point], detailCar.chevrolet_countryside[point], detailCar.chevrolet_combined[point]);
                 break;
 
             case 3:
-                CheckRadioButton(detailCar.ford_town[point], detailCar.ford_countryside[point], detailCar.ford_combined[point]);
+                checkRadioButton(detailCar.ford_town[point], detailCar.ford_countryside[point], detailCar.ford_combined[point]);
                 break;
 
             case 4:
-                CheckRadioButton(detailCar.foton_town[point], detailCar.foton_countryside[point], detailCar.foton_combined[point]);
+                checkRadioButton(detailCar.foton_town[point], detailCar.foton_countryside[point], detailCar.foton_combined[point]);
                 break;
 
             case 5:
-                CheckRadioButton(detailCar.honda_town[point], detailCar.honda_countryside[point], detailCar.honda_combined[point]);
+                checkRadioButton(detailCar.honda_town[point], detailCar.honda_countryside[point], detailCar.honda_combined[point]);
                 break;
 
             case 6:
-                CheckRadioButton(detailCar.isuzu_town[point], detailCar.isuzu_countryside[point], detailCar.isuzu_combined[point]);
+                checkRadioButton(detailCar.isuzu_town[point], detailCar.isuzu_countryside[point], detailCar.isuzu_combined[point]);
                 break;
 
             case 7:
-                CheckRadioButton(detailCar.mazda_town[point], detailCar.mazda_countryside[point], detailCar.mazda_combined[point]);
+                checkRadioButton(detailCar.mazda_town[point], detailCar.mazda_countryside[point], detailCar.mazda_combined[point]);
                 break;
 
             case 8:
-                CheckRadioButton(detailCar.mercedes_benz_town[point], detailCar.mercedes_benz_countryside[point], detailCar.mercedes_benz_combined[point]);
+                checkRadioButton(detailCar.mercedes_benz_town[point], detailCar.mercedes_benz_countryside[point], detailCar.mercedes_benz_combined[point]);
                 break;
 
             case 9:
-                CheckRadioButton(detailCar.mg_town[point], detailCar.mg_countryside[point], detailCar.mg_combined[point]);
+                checkRadioButton(detailCar.mg_town[point], detailCar.mg_countryside[point], detailCar.mg_combined[point]);
                 break;
 
             case 10:
-                CheckRadioButton(detailCar.mini_town[point], detailCar.mini_countryside[point], detailCar.mini_combined[point]);
+                checkRadioButton(detailCar.mini_town[point], detailCar.mini_countryside[point], detailCar.mini_combined[point]);
                 break;
 
             case 11:
-                CheckRadioButton(detailCar.mitsubishi_town[point], detailCar.mitsubishi_countryside[point], detailCar.mitsubishi_combined[point]);
+                checkRadioButton(detailCar.mitsubishi_town[point], detailCar.mitsubishi_countryside[point], detailCar.mitsubishi_combined[point]);
                 break;
 
             case 12:
-                CheckRadioButton(detailCar.nissan_town[point], detailCar.nissan_countryside[point], detailCar.nissan_combined[point]);
+                checkRadioButton(detailCar.nissan_town[point], detailCar.nissan_countryside[point], detailCar.nissan_combined[point]);
                 break;
 
             case 13:
-                CheckRadioButton(detailCar.suzuki_town[point], detailCar.suzuki_countryside[point], detailCar.suzuki_combined[point]);
+                checkRadioButton(detailCar.suzuki_town[point], detailCar.suzuki_countryside[point], detailCar.suzuki_combined[point]);
                 break;
 
             case 14:
-                CheckRadioButton(detailCar.tata_town[point], detailCar.tata_countryside[point], detailCar.tata_combined[point]);
+                checkRadioButton(detailCar.tata_town[point], detailCar.tata_countryside[point], detailCar.tata_combined[point]);
                 break;
 
             case 15:
-                CheckRadioButton(detailCar.toyota_town[point], detailCar.toyota_countryside[point], detailCar.toyota_combined[point]);
+                checkRadioButton(detailCar.toyota_town[point], detailCar.toyota_countryside[point], detailCar.toyota_combined[point]);
                 break;
         }
     }
 
-    public void CheckRadioButton(double town, double countryside, double combine) {
+    public void checkRadioButton(double town, double countryside, double combine) {
         if (radioTown.isChecked()) {
             calAmountOil = distanceInDouble / town;
         } else if (radioCountrySide.isChecked()) {
@@ -458,7 +457,7 @@ public class CalculateOilFragment extends Fragment implements AdapterView.OnItem
     }
 
     public Double priceOil(Double price) {
-        CheckTypeCar();
+        checkTypeCar();
         String strCalAmountOil = String.format("%.2f", calAmountOil);
         calSpentOil = Double.parseDouble(strCalAmountOil) * price;
         return calSpentOil;
@@ -467,7 +466,7 @@ public class CalculateOilFragment extends Fragment implements AdapterView.OnItem
     private void saveData() {
         final DatabaseOil databaseOil = new DatabaseOil(getActivity());
 
-        long save = databaseOil.InsertData(textNameCar.getText().toString(), textTypeCar.getText().toString(), startTextLocation.getText().toString(), endTextLocation.getText().toString(), textCalDis.getText().toString()
+        long save = databaseOil.insertData(textNameCar.getText().toString(), textTypeCar.getText().toString(), startTextLocation.getText().toString(), endTextLocation.getText().toString(), textCalDis.getText().toString()
                 , textCalDu.getText().toString(), textTypeOil.getText().toString(), calOil.getText().toString(), calMoney.getText().toString(), str_date, str_average_baht);
         if (save <= 0) {
 

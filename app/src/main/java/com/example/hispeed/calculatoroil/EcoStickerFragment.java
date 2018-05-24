@@ -29,7 +29,7 @@ public class EcoStickerFragment extends Fragment {
     public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        BlindWedget();
+        bindView();
 
         btn_eco_sticker.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,7 +45,7 @@ public class EcoStickerFragment extends Fragment {
 
     }
 
-    private void BlindWedget() {
+    private void bindView() {
         btn_eco_sticker = (Button) getActivity().findViewById(R.id.btn_eco_sticker);
         imgCargif = (ImageView) getActivity().findViewById(R.id.ImgCargif);
     }

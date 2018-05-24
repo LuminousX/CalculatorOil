@@ -55,7 +55,7 @@ public class HistoryFragment extends Fragment implements NavigationView.OnNaviga
         setHasOptionsMenu(true);
         super.onViewCreated(view, savedInstanceState);
 
-        BlindWedget();
+        bindView();
 
         databaseOil = new DatabaseOil(getActivity());
         sqLiteDatabase = databaseOil.getWritableDatabase();
@@ -160,7 +160,7 @@ public class HistoryFragment extends Fragment implements NavigationView.OnNaviga
         return false;
     }
 
-    private void BlindWedget() {
+    private void bindView() {
         text_no_history = (TextView) getActivity().findViewById(R.id.text_no_history);
         recyclerView = (RecyclerView) getActivity().findViewById(R.id.recyclerView_list);
     }

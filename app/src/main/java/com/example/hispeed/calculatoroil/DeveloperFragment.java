@@ -31,7 +31,7 @@ public class DeveloperFragment extends Fragment implements NavigationView.OnNavi
         setHasOptionsMenu(true);
         super.onViewCreated(view, savedInstanceState);
 
-        BlindWedget();
+        bindView();
 
         edt_title_gmail.setText("Siliverlose@gmail.com");
         edt_subject_gmail.requestFocus();
@@ -76,7 +76,7 @@ public class DeveloperFragment extends Fragment implements NavigationView.OnNavi
         return false;
     }
 
-    private void BlindWedget() {
+    private void bindView() {
         edt_title_gmail = (EditText) getActivity().findViewById(R.id.edt_title_gmail);
         edt_subject_gmail = (EditText) getActivity().findViewById(R.id.edt_subject_gmail);
         edt_text_gmail = (EditText) getActivity().findViewById(R.id.edt_text_gmail);

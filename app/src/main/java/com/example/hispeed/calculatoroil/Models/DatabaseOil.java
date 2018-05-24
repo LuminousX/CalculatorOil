@@ -50,7 +50,7 @@ public class DatabaseOil extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public long InsertData(String name, String type_car, String origin, String destination, String distance, String duration, String type_oil, String spend_oil, String money, String date, String Average_baht) {
+    public long insertData(String name, String type_car, String origin, String destination, String distance, String duration, String type_oil, String spend_oil, String money, String date, String Average_baht) {
         try {
 
             sqLiteDatabase = this.getWritableDatabase();
@@ -82,5 +82,4 @@ public class DatabaseOil extends SQLiteOpenHelper {
         String[] column = {COL_NAME, COL_TYPE_CAR, COL_ORIGIN, COL_DESTINATION, COL_DISTANCE, COL_DURATION, COL_TYPE_OIL, COL_SPEND_OIL, COL_MONEY, COL_DATE, COL_AVERAGE_BAHT};
         return sq.query(TABLE_NAME, column, null, null, null, null, null);
     }
-
 }

@@ -69,14 +69,12 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Directi
     private static final int RESULT_OK = -1;
 
     public MapFragment() {
-
     }
 
     GoogleMap mGoogleMap;
     SupportMapFragment mapFrag;
 
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
-
 
     private EditText startAddress, endAddress;
     private List<Marker> originMarkers = new ArrayList<>();
@@ -115,7 +113,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Directi
         setHasOptionsMenu(true);
         super.onViewCreated(view, savedInstanceState);
 
-        BlindWidget();
+        bindView();
         clearTextOrigin();
         clearTextDestination();
 
@@ -130,7 +128,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Directi
         btnsearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CheckWifi();
+                checkWifi();
             }
         });
 
@@ -170,7 +168,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Directi
                 //Request location updates:
             }
         }
-
     }
 
     @Override
@@ -373,13 +370,13 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Directi
                 }
                 break;
             case R.id.btn_map_type:
-                map_type();
+                mapType();
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private void BlindWidget() {
+    private void bindView() {
         mapFrag = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.fragmentmap);
 
         startAddress = (EditText) getActivity().findViewById(R.id.editstartlocation);
@@ -529,7 +526,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Directi
         }
     }
 
-    public void CheckWifi() {
+    public void checkWifi() {
         ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo wifi = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
         NetworkInfo mobile_net = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
@@ -571,7 +568,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Directi
         }
     }
 
-    public void map_type() {
+    public void mapType() {
         String[] items = {"Hybrid", "Normal", "Satellite", "Terrain"};
         final int[] checkedItems = new int[1];
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AlertDialogStyle);
