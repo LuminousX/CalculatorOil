@@ -37,9 +37,9 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.hispeed.calculatoroil.Models.DirectionFinder;
+import com.example.hispeed.calculatoroil.ConnectApi.DirectionFinderRetrofit;
+import com.example.hispeed.calculatoroil.ConnectApi.RoutesValue;
 import com.example.hispeed.calculatoroil.Models.DirectionFinderListener;
-import com.example.hispeed.calculatoroil.Models.Route;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationAvailability;
@@ -59,7 +59,6 @@ import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -92,6 +91,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Directi
 
     private Button btncalculateOil, btnsearch, btncleartextori, btncleartextdes;
 
+    private TextView textDistance, textDuration;
+
     double locationLat, locationLng;
 
     public String locationAddress;
@@ -101,6 +102,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Directi
 
     FloatingActionButton floatingcalculate;
     ImageButton imageButton;
+
+    boolean checkStatusLocation = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -135,7 +138,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Directi
         floatingcalculate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                calculateActivity();
+                sendDataToCalculatorFragment();
             }
         });
 
@@ -290,48 +293,52 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Directi
     }
 
     @Override
-    public void onDirectionFinderSuccess(List<Route> routes) {
+    public void onDirectionFinderSuccess(List<RoutesValue> values) {
         progressDialog.dismiss();
         polylinePaths = new ArrayList<>();
         originMarkers = new ArrayList<>();
         destinationMarkers = new ArrayList<>();
 
-        for (Route route : routes) {
+        if (values.isEmpty()) {
+            Toast.makeText(getActivity(), "ไม่สามารถค้นหาสถานที่นี้ได้", Toast.LENGTH_SHORT).show();
+            textDuration.setText("0 mins");
+            textDistance.setText("0 km");
+            checkStatusLocation = false;
+            return;
+        }
 
-            int disInt = route.distance.value;
-            int duInt = route.duration.value;
-            distanceStr = Integer.toString(disInt);
-            durationStr = Integer.toString(duInt);
+        for (RoutesValue routesValue : values) {
+            checkStatusLocation = true;
 
-            distanceText = route.distance.text;
-            durationText = route.duration.text;
+            distanceStr = String.valueOf(values.get(0).distance.value);
+            durationStr = String.valueOf(values.get(0).duration.value);
 
-            zoomMap(route.startLocation, route.endLocation);
+            distanceText = values.get(0).distance.text;
+            durationText = values.get(0).duration.text;
 
-            ((TextView) getActivity().findViewById(R.id.texttime)).setText(route.duration.text);
-            ((TextView) getActivity().findViewById(R.id.textdistance)).setText(route.distance.text);
+            zoomMap(routesValue.startLocation, routesValue.endLocation);
+
+            textDuration.setText(durationText);
+            textDistance.setText(distanceText);
 
             originMarkers.add(mGoogleMap.addMarker(new MarkerOptions()
                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_origin))
-                    .title(route.startAddress)
-                    .position(route.startLocation)));
+                    .title(routesValue.startAddress)
+                    .position(routesValue.startLocation)));
             destinationMarkers.add(mGoogleMap.addMarker(new MarkerOptions()
                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_destination))
-                    .title(route.endAddress)
-                    .position(route.endLocation)));
+                    .title(routesValue.endAddress)
+                    .position(routesValue.endLocation)));
 
             PolylineOptions polylineOptions = new PolylineOptions().
                     geodesic(true).
                     color(Color.BLUE).
                     width(10);
 
-            for (int i = 0; i < route.points.size(); i++)
-                polylineOptions.add(route.points.get(i));
+            for (int i = 0; i < values.get(0).point.size(); i++)
+                polylineOptions.add(values.get(0).point.get(i));
 
             polylinePaths.add(mGoogleMap.addPolyline(polylineOptions));
-        }
-        if (originMarkers.isEmpty() || destinationMarkers.isEmpty()) {
-            Toast.makeText(getActivity(), "ไม่สามารถค้นหาสถานที่นี้ได้", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -389,6 +396,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Directi
         floatingcalculate = (FloatingActionButton) getActivity().findViewById(R.id.btncalculateOil);
 
         imageButton = (ImageButton) getActivity().findViewById(R.id.btn_change_editext);
+
+        textDuration = (TextView) getActivity().findViewById(R.id.texttime);
+        textDistance = (TextView) getActivity().findViewById(R.id.textdistance);
     }
 
     private void clearTextOrigin() {
@@ -477,7 +487,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Directi
         });
     }
 
-    private void SearchLocation() {
+    private void searchLocation() {
         startLocation = startAddress.getText().toString();
         endLocation = endAddress.getText().toString();
 
@@ -492,19 +502,13 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Directi
             return;
         }
 
-        try {
-            new DirectionFinder(this, startLocation, endLocation).execute();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
+        new DirectionFinderRetrofit(this, startLocation, endLocation).connectLocation();
     }
 
-    public void calculateActivity() {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+    public void sendDataToCalculatorFragment() {
 
         Bundle bundle = new Bundle();
-        if (distanceStr != null && durationStr != null) {
-
+        if (checkStatusLocation) {
             CalculateOilFragment calculateOilFragment = new CalculateOilFragment();
 
             bundle.putString("distanceIntent", distanceStr);
@@ -534,7 +538,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Directi
         if (!(wifi.isConnected()) && !(mobile_net.isConnected())) {
             Toast.makeText(getActivity(), "การเชื่อมต่อล้มเหลว", Toast.LENGTH_SHORT).show();
         } else {
-            SearchLocation();
+            searchLocation();
             startAddress.onEditorAction(EditorInfo.IME_ACTION_DONE);
             endAddress.onEditorAction(EditorInfo.IME_ACTION_DONE);
         }
@@ -624,7 +628,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Directi
                 });
         final AlertDialog alert = builder.create();
         alert.show();
-
     }
 
     private void zoomMap(LatLng originPlace, LatLng destinationPlace) {

@@ -1,6 +1,7 @@
 package com.example.hispeed.calculatoroil.Models;
 
-import com.example.hispeed.calculatoroil.Models.Route;
+import com.example.hispeed.calculatoroil.ConnectApi.RoutesValue;
+
 
 import java.util.List;
 
@@ -10,5 +11,6 @@ import java.util.List;
 
 public interface DirectionFinderListener {
     void onDirectionFinderStart();
-    void onDirectionFinderSuccess(List<Route> route);
+
+    void onDirectionFinderSuccess(List<RoutesValue> values);
 }
