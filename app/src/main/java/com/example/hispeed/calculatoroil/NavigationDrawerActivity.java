@@ -23,12 +23,12 @@ import com.google.android.gms.common.api.GoogleApiClient;
 
 public class NavigationDrawerActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    Toolbar toolbar = null;
-    GoogleApiClient mGoogleApiClient;
+    private Toolbar toolbar = null;
+    private GoogleApiClient mGoogleApiClient;
 
-    ActionBarDrawerToggle toggle;
-    DrawerLayout drawer;
-    MapFragment mapFragment;
+    private ActionBarDrawerToggle toggle;
+    private DrawerLayout drawer;
+    private MapFragment mapFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +60,6 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
         fragmentTransaction.commit();
 
     }
-
 
     @Override
     public void onBackPressed() {
@@ -116,7 +115,6 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
             fragmentTransaction.replace(R.id.fragment_continer, ecoStickerFragment);
             fragmentTransaction.commit();
         } else if (id == R.id.nav_bookmark) {
-
             HistoryFragment historyFragment = new HistoryFragment();
             android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.setCustomAnimations(R.anim.enter_right, R.anim.exit_left, R.anim.enter_left, R.anim.exit_right);
@@ -124,7 +122,6 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
             //  fragmentTransaction.addToBackStack("tag");
             fragmentTransaction.commit();
         } else if (id == R.id.nav_dev) {
-
             DeveloperFragment developerFragment = new DeveloperFragment();
             android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.setCustomAnimations(R.anim.enter_right, R.anim.exit_left, R.anim.enter_left, R.anim.exit_right);
@@ -149,7 +146,6 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
             });
             AlertDialog alertDialog = builder.create();
             alertDialog.show();
-
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

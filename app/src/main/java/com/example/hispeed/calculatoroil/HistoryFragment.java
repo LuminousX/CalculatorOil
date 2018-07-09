@@ -32,17 +32,17 @@ public class HistoryFragment extends Fragment implements NavigationView.OnNaviga
     public HistoryFragment() {
     }
 
-    DatabaseOil databaseOil;
-    SQLiteDatabase sqLiteDatabase;
-    Cursor cursor;
+    private DatabaseOil databaseOil;
+    private SQLiteDatabase sqLiteDatabase;
+    private Cursor cursor;
 
-    String name, type_car, origin, destination, distance, duration, type_oil, spend_oil, money, str_date, average_baht;
+    private String name, type_car, origin, destination, distance, duration, type_oil, spend_oil, money, str_date, average_baht;
 
-    TextView text_no_history;
+    private TextView textNoHistory;
 
-    RecyclerView recyclerView;
-    AdapterRecyclerView adapterRecyclerView;
-    ArrayList<DetailRecyclerView> detailRecyclerViews = new ArrayList<>();
+    private RecyclerView recyclerView;
+    private AdapterRecyclerView adapterRecyclerView;
+    private ArrayList<DetailRecyclerView> detailRecyclerViews = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -68,18 +68,6 @@ public class HistoryFragment extends Fragment implements NavigationView.OnNaviga
         adapterRecyclerView = new AdapterRecyclerView(getActivity(), detailRecyclerViews);
 
         retrieve();
-
-        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), recyclerView, new ClickListener() {
-            @Override
-            public void onClick(View view, int position) {
-
-            }
-
-            @Override
-            public void onLongClick(View view, final int position) {
-
-            }
-        }));
 
         ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
@@ -126,7 +114,7 @@ public class HistoryFragment extends Fragment implements NavigationView.OnNaviga
                                 adapterRecyclerView.notifyDataSetChanged();
 
                                 if (detailRecyclerViews.size() < 1) {
-                                    text_no_history.setVisibility(View.VISIBLE);
+                                    textNoHistory.setVisibility(View.VISIBLE);
                                 }
                             }
                         })
@@ -161,7 +149,7 @@ public class HistoryFragment extends Fragment implements NavigationView.OnNaviga
     }
 
     private void bindView() {
-        text_no_history = (TextView) getActivity().findViewById(R.id.text_no_history);
+        textNoHistory = (TextView) getActivity().findViewById(R.id.text_no_history);
         recyclerView = (RecyclerView) getActivity().findViewById(R.id.recyclerView_list);
     }
 
@@ -178,34 +166,34 @@ public class HistoryFragment extends Fragment implements NavigationView.OnNaviga
         while (!cursor.isAfterLast()) {
 
             String nameRV = cursor.getString(0);
-            String type_carRV = cursor.getString(1);
+            String typeCarRV = cursor.getString(1);
             String originRV = cursor.getString(2);
             String destinationRV = cursor.getString(3);
             String distanceRV = cursor.getString(4);
             String durationRV = cursor.getString(5);
-            String type_oilRV = cursor.getString(6);
-            String spend_oilRV = cursor.getString(7);
+            String typeOilRV = cursor.getString(6);
+            String spendOilRV = cursor.getString(7);
             String moneyRV = cursor.getString(8);
-            String str_dateRV = cursor.getString(9);
-            String average_bahtRV = cursor.getString(10);
+            String dateRV = cursor.getString(9);
+            String averageBahtRV = cursor.getString(10);
 
-            DetailRecyclerView detailRecyclerView = new DetailRecyclerView(nameRV, type_carRV, originRV, destinationRV, distanceRV, durationRV, type_oilRV, spend_oilRV, moneyRV, str_dateRV, average_bahtRV);
+            DetailRecyclerView detailRecyclerView = new DetailRecyclerView(nameRV, typeCarRV, originRV, destinationRV, distanceRV, durationRV, typeOilRV, spendOilRV, moneyRV, dateRV, averageBahtRV);
             detailRecyclerViews.add(detailRecyclerView);
             cursor.moveToNext();
         }
         if (!(detailRecyclerViews.size() < 1)) {
-
             recyclerView.setAdapter(adapterRecyclerView);
         }
-        //   cursor.close();
-        //    databaseOil.close();
+
+      //  cursor.close();
+       // databaseOil.close();
+
         if (detailRecyclerViews.size() < 1) {
-            text_no_history.setVisibility(View.VISIBLE);
+            textNoHistory.setVisibility(View.VISIBLE);
 
         }
         if (detailRecyclerViews.isEmpty()) {
             recyclerView.setVisibility(View.INVISIBLE);
         }
-
     }
 }

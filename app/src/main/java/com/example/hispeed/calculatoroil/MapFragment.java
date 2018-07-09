@@ -89,21 +89,21 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Directi
     private Marker marker;
     private MarkerOptions markerOptions;
 
-    private Button btncalculateOil, btnsearch, btncleartextori, btncleartextdes;
+    private Button btncalculateOil, btnSearch, btnClearTextOrigin, btnClearTextDestination;
 
     private TextView textDistance, textDuration;
 
-    double locationLat, locationLng;
+    private double locationLat, locationLng;
 
-    public String locationAddress;
+    private String locationAddress;
 
     private FragmentTransaction fragmentTransaction;
     private int checkedIndex = 1;
 
-    FloatingActionButton floatingcalculate;
-    ImageButton imageButton;
+    private FloatingActionButton floatingCalculate;
+    private ImageButton imageButton;
 
-    boolean checkStatusLocation = false;
+    private boolean checkStatusLocation = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -120,22 +120,18 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Directi
         clearTextOrigin();
         clearTextDestination();
 
-        googleApiClient = new GoogleApiClient.Builder(getActivity())
-                .addApi(LocationServices.API)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .build();
+        connectGoogleApi();
 
         mapFrag.getMapAsync(this);
 
-        btnsearch.setOnClickListener(new View.OnClickListener() {
+        btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 checkWifi();
             }
         });
 
-        floatingcalculate.setOnClickListener(new View.OnClickListener() {
+        floatingCalculate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 sendDataToCalculatorFragment();
@@ -155,6 +151,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Directi
                 endAddress.setText(text1);
             }
         });
+
+        locationGps();
     }
 
     @Override
@@ -179,25 +177,14 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Directi
         if (googleApiClient != null && googleApiClient.isConnected()) {
             googleApiClient.disconnect();
         }
-//        if (fragmentTransaction.isAddToBackStackAllowed()) {
-//            getActivity().getSupportFragmentManager().beginTransaction().remove(mapFrag).commitAllowingStateLoss();
-//        }
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mGoogleMap = googleMap;
-
         mGoogleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
         if (ActivityCompat.checkSelfPermission(getActivity(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
             return;
         }
         mGoogleMap.getUiSettings().setMapToolbarEnabled(false);
@@ -208,21 +195,12 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Directi
     @Override
     public void onConnected(Bundle bundle) {
         if (ActivityCompat.checkSelfPermission(getActivity(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
             return;
         }
+
         LocationAvailability locationAvailability = LocationServices.FusedLocationApi.getLocationAvailability(googleApiClient);
         if (locationAvailability.isLocationAvailable()) {
-            locationRequest = new LocationRequest()
-                    .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-                    .setInterval(3000)
-                    .setFastestInterval(1000);
+            locationGps();
             LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, locationRequest, this);
         }
     }
@@ -242,9 +220,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Directi
 
             if (addresses.size() > 0) {
                 String address = addresses.get(0).getAddressLine(0);
-
                 locationAddress = address;
-//                locationAddress = address + " " + city + " " + state;
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -389,11 +365,11 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Directi
         startAddress = (EditText) getActivity().findViewById(R.id.editstartlocation);
         endAddress = (EditText) getActivity().findViewById(R.id.editendlocation);
 
-        btnsearch = (Button) getActivity().findViewById(R.id.btnsearch);
-        btncleartextori = (Button) getActivity().findViewById(R.id.btncleartextori);
-        btncleartextdes = (Button) getActivity().findViewById(R.id.btncleartextdes);
+        btnSearch = (Button) getActivity().findViewById(R.id.btnsearch);
+        btnClearTextOrigin = (Button) getActivity().findViewById(R.id.btncleartextori);
+        btnClearTextDestination = (Button) getActivity().findViewById(R.id.btncleartextdes);
 
-        floatingcalculate = (FloatingActionButton) getActivity().findViewById(R.id.btncalculateOil);
+        floatingCalculate = (FloatingActionButton) getActivity().findViewById(R.id.btncalculateOil);
 
         imageButton = (ImageButton) getActivity().findViewById(R.id.btn_change_editext);
 
@@ -401,27 +377,32 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Directi
         textDistance = (TextView) getActivity().findViewById(R.id.textdistance);
     }
 
-    private void clearTextOrigin() {
-        startAddress.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (startAddress.getText().toString().length() > 0) {
-                    btncleartextori.setVisibility(View.VISIBLE);
-                } else {
-                    btncleartextori.setVisibility(View.INVISIBLE);
-                }
-            }
-        });
+    private void connectGoogleApi() {
+        googleApiClient = new GoogleApiClient.Builder(getActivity())
+                .addApi(LocationServices.API)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .build();
+    }
 
-        btncleartextori.setOnClickListener(new View.OnClickListener() {
+    private void clearTextOrigin() {
+        showButtonClearText(startAddress, btnClearTextOrigin);
+    }
+
+    private void clearTextDestination() {
+        showButtonClearText(endAddress, btnClearTextDestination);
+    }
+
+    public void showButtonClearText(final EditText edtLocation, final Button btnClearText) {
+        btnClearText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startAddress.setText("");
-                btncleartextori.setVisibility(View.INVISIBLE);
+                edtLocation.setText("");
+                btnClearText.setVisibility(View.INVISIBLE);
             }
         });
 
-        startAddress.addTextChangedListener(new TextWatcher() {
+        edtLocation.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -430,10 +411,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Directi
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.length() != 0) {
-                    btncleartextori.setVisibility(View.VISIBLE);
+                    btnClearText.setVisibility(View.VISIBLE);
 
                 } else {
-                    btncleartextori.setVisibility(View.INVISIBLE);
+                    btnClearText.setVisibility(View.INVISIBLE);
                 }
             }
 
@@ -444,47 +425,11 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Directi
         });
     }
 
-    private void clearTextDestination() {
-        endAddress.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (endAddress.getText().toString().length() > 0) {
-                    btncleartextdes.setVisibility(View.VISIBLE);
-                } else {
-                    btncleartextdes.setVisibility(View.INVISIBLE);
-                }
-            }
-        });
-
-        btncleartextdes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                endAddress.setText("");
-                btncleartextdes.setVisibility(View.INVISIBLE);
-            }
-        });
-
-        endAddress.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.length() != 0) {
-                    btncleartextdes.setVisibility(View.VISIBLE);
-
-                } else {
-                    btncleartextdes.setVisibility(View.INVISIBLE);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
+    private void locationGps() {
+        locationRequest = LocationRequest.create()
+                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+                .setInterval(1000)
+                .setFastestInterval(1000);
     }
 
     private void searchLocation() {
@@ -506,7 +451,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Directi
     }
 
     public void sendDataToCalculatorFragment() {
-
         Bundle bundle = new Bundle();
         if (checkStatusLocation) {
             CalculateOilFragment calculateOilFragment = new CalculateOilFragment();

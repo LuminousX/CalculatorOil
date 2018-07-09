@@ -16,9 +16,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class DeveloperFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener {
-    Intent emailIntent;
+    private Intent emailIntent;
 
-    EditText edt_title_gmail, edt_subject_gmail, edt_text_gmail;
+    private EditText edtTitleGmail, edtSubjectGmail, edtTextGmail;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -33,8 +33,8 @@ public class DeveloperFragment extends Fragment implements NavigationView.OnNavi
 
         bindView();
 
-        edt_title_gmail.setText("Siliverlose@gmail.com");
-        edt_subject_gmail.requestFocus();
+        edtTitleGmail.setText("Siliverlose@gmail.com");
+        edtSubjectGmail.requestFocus();
     }
 
     @Override
@@ -48,21 +48,21 @@ public class DeveloperFragment extends Fragment implements NavigationView.OnNavi
         switch (item.getItemId()) {
             case R.id.btn_send:
 
-                if (!(edt_title_gmail.getText().toString().equals("Siliverlose@gmail.com"))) {
+                if (!(edtTitleGmail.getText().toString().equals("Siliverlose@gmail.com"))) {
                     Toast.makeText(getActivity(), "จีเมล์ของผู้รับไม่ถูกต้อง", Toast.LENGTH_SHORT).show();
 
-                } else if (edt_subject_gmail.getText().toString().length() == 0) {
+                } else if (edtSubjectGmail.getText().toString().length() == 0) {
                     Toast.makeText(getActivity(), "กรุณาเขียนชื่อเรื่อง", Toast.LENGTH_SHORT).show();
 
-                } else if (edt_text_gmail.getText().toString().length() == 0) {
+                } else if (edtTextGmail.getText().toString().length() == 0) {
                     Toast.makeText(getActivity(), "กรุณาเขียนข้อความที่ต้องการส่ง", Toast.LENGTH_SHORT).show();
 
                 } else {
                     emailIntent = new Intent(Intent.ACTION_SEND);
-                    String to = edt_title_gmail.getText().toString();
+                    String to = edtTitleGmail.getText().toString();
                     emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{to});
-                    emailIntent.putExtra(Intent.EXTRA_SUBJECT, edt_subject_gmail.getText().toString());
-                    emailIntent.putExtra(Intent.EXTRA_TEXT, edt_text_gmail.getText().toString());
+                    emailIntent.putExtra(Intent.EXTRA_SUBJECT, edtSubjectGmail.getText().toString());
+                    emailIntent.putExtra(Intent.EXTRA_TEXT, edtTextGmail.getText().toString());
                     emailIntent.setType("message/rfc822");
                     startActivity(Intent.createChooser(emailIntent, "Send Email"));
                 }
@@ -77,9 +77,9 @@ public class DeveloperFragment extends Fragment implements NavigationView.OnNavi
     }
 
     private void bindView() {
-        edt_title_gmail = (EditText) getActivity().findViewById(R.id.edt_title_gmail);
-        edt_subject_gmail = (EditText) getActivity().findViewById(R.id.edt_subject_gmail);
-        edt_text_gmail = (EditText) getActivity().findViewById(R.id.edt_text_gmail);
+        edtTitleGmail = (EditText) getActivity().findViewById(R.id.edt_title_gmail);
+        edtSubjectGmail = (EditText) getActivity().findViewById(R.id.edt_subject_gmail);
+        edtTextGmail = (EditText) getActivity().findViewById(R.id.edt_text_gmail);
     }
 }
 

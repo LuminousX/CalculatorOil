@@ -11,10 +11,10 @@ import android.widget.ImageView;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
-    Handler handler;
-    Runnable runnable;
-    long delay;
-    long time = 3500L;
+    private Handler handler;
+    private Runnable runnable;
+    private long delay;
+    private long time = 3500L;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,10 +28,8 @@ public class SplashScreenActivity extends AppCompatActivity {
         runnable = new Runnable() {
             @Override
             public void run() {
-                //  if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
                 Intent intent = new Intent(getApplicationContext(), NavigationDrawerActivity.class);
                 startActivity(intent);
-                //   }
             }
         };
 
@@ -39,7 +37,6 @@ public class SplashScreenActivity extends AppCompatActivity {
         img_loading.setBackgroundResource(R.drawable.loading_screen);
         AnimationDrawable animationDrawable = (AnimationDrawable) img_loading.getBackground();
         animationDrawable.start();
-
     }
 
     public void onResume() {

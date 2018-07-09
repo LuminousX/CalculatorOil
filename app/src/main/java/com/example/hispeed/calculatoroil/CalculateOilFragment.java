@@ -38,43 +38,41 @@ import java.util.Date;
 import java.util.TimeZone;
 
 
-public class CalculateOilFragment extends Fragment implements AdapterView.OnItemSelectedListener {
+public class CalculateOilFragment extends Fragment {
 
     public CalculateOilFragment() {
     }
 
-    private Button btncal;
+    private Button btnCalculate;
 
     String[] arrayOil = {"ประเภทน้ำมัน", "แก๊สโซฮอล 95", "แก๊สโซฮอล 91", "แก๊สโซฮอล E20", "แก๊สโซฮอล E85", "ดีเซล", "เบนซิน 95"};
-    String[] type_null = {"รุ่น"};
+    String[] typeNull = {"รุ่น"};
 
-    private Spinner spinType, spinOil, spinType2;
+    private Spinner spinTypeCar, spinTypeBrand, spinTypeOil;
 
-    private String distanceStringIntent, durationStringIntent, distanceTextIntent, durationTextIntent, startLocation, endLocation, str_date, str_average_baht, distanceText;
+    private String distanceText, durationText, startLocation, endLocation, strDate;
 
-    private TextView textCalDis, textCalDu, startTextLocation, endTextLocation, textTypeOil, textNameCar, calOil, calMoney, textTypeCar, average_baht, textsave;
+    private TextView textCalDistance, textCalDuration, startTextLocation, endTextLocation, textTypeOil, textNameCar, calOil, calMoney, textTypeCar, averageBaht, textSave;
 
-    private double calAmountOil, calSpentOil, distanceInDouble;
+    private double calAmountOil, calSpendOil, distance, duration;
 
-    public DetailCar detailCar = new DetailCar();
+    private DetailCar detailCar = new DetailCar();
 
-    public RadioButton radioTown, radioCountrySide, radioCombined;
-    public int point;
+    private RadioButton radioTown, radioCountrySide, radioCombined;
+    private int point;
 
-    public EditText edt_oil_price;
-    public ImageView image_search_oil_price;
+    private EditText edtOilPrice;
+    private ImageView imageSearchOilPrice;
 
-    double oil_price_search;
-
-    RelativeLayout relativeLayout, relative_text_save;
+    private RelativeLayout relativeLayout, relativeTextSave;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        distanceStringIntent = getArguments().getString("distanceIntent");
-        durationStringIntent = getArguments().getString("durationIntent");
-        distanceTextIntent = getArguments().getString("distanceText");
-        durationTextIntent = getArguments().getString("durationText");
+        distance = Double.parseDouble(String.format("%.1f", Double.parseDouble(getArguments().getString("distanceIntent")) / 1000));
+        duration = Double.parseDouble(getArguments().getString("durationIntent"));
+        distanceText = getArguments().getString("distanceText");
+        durationText = getArguments().getString("durationText");
         startLocation = getArguments().getString("startLocation");
         endLocation = getArguments().getString("endLocation");
 
@@ -93,10 +91,10 @@ public class CalculateOilFragment extends Fragment implements AdapterView.OnItem
         bindView();
         carTypeNull();
 
-        spinType.setAdapter(showAdapter(detailCar.type_car));
-        spinOil.setAdapter(showAdapter(arrayOil));
+        spinTypeCar.setAdapter(showAdapter(detailCar.type_car));
+        spinTypeOil.setAdapter(showAdapter(arrayOil));
 
-        spinType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinTypeCar.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 selectTypeCar();
@@ -108,91 +106,66 @@ public class CalculateOilFragment extends Fragment implements AdapterView.OnItem
             }
         });
 
-        btncal.setOnClickListener(new View.OnClickListener() {
+        btnCalculate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 btnCalClick();
             }
         });
 
-        textsave.setOnClickListener(new View.OnClickListener() {
+        textSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 checkData();
             }
         });
 
-        image_search_oil_price.setOnClickListener(new View.OnClickListener() {
+        imageSearchOilPrice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = intentOilPrice(getActivity());
-                startActivity(intent);
+                startActivity(new Intent(intentOilPrice(getActivity())));
             }
         });
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
-
     public void btnCalClick() {
-        if (spinType.getSelectedItemPosition() == 0) {
+        if (spinTypeCar.getSelectedItemPosition() == 0) {
             Toast.makeText(getActivity(), "กรุณาใส่ยี่ห้อรถยนต์", Toast.LENGTH_SHORT).show();
             return;
-        } else if (spinType2.getSelectedItemPosition() == 0) {
+        } else if (spinTypeBrand.getSelectedItemPosition() == 0) {
             Toast.makeText(getActivity(), "กรุณาใส่รุ่นรถยนต์", Toast.LENGTH_SHORT).show();
             return;
-        } else if (spinOil.getSelectedItemPosition() == 0) {
+        } else if (spinTypeOil.getSelectedItemPosition() == 0) {
             Toast.makeText(getActivity(), "กรุณาใส่ประเภทน้ำมัน", Toast.LENGTH_SHORT).show();
             return;
         } else if (!radioCombined.isChecked() && !radioCountrySide.isChecked() && !radioTown.isChecked()) {
             Toast.makeText(getActivity(), "กรุณาใส่สภาวะการใช้งานรถยนต์", Toast.LENGTH_SHORT).show();
             return;
-        } else if (edt_oil_price.getText().toString().length() == 0) {
+        } else if (edtOilPrice.getText().toString().length() == 0) {
             Toast.makeText(getActivity(), "กรุณาใส่ค่าน้ำมัน", Toast.LENGTH_SHORT).show();
             return;
-        } else if (spinType2.getSelectedItemPosition() == 14) {
+        } else if (spinTypeBrand.getSelectedItemPosition() == 14) {
             Toast.makeText(getActivity(), "ไม่พบข้อมูลของรถยนต์รุ่นนี้", Toast.LENGTH_SHORT).show();
             return;
         } else {
-
             relativeLayout.setAnimation(showAnimation(relativeLayout));
-            relative_text_save.setAnimation(showAnimation(relative_text_save));
+            relativeTextSave.setAnimation(showAnimation(relativeTextSave));
 
-            oil_price_search = Double.parseDouble(edt_oil_price.getText().toString());
+            priceOil(Double.parseDouble(edtOilPrice.getText().toString()));
 
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-            simpleDateFormat.setTimeZone(TimeZone.getTimeZone("UTC+7"));
-            str_date = simpleDateFormat.format(new Date());
-
-            distanceText = String.format("%.1f", Double.parseDouble(distanceStringIntent) / 1000);
-            double distanceDouble = Double.parseDouble(distanceText);
-
-            checkPriceOil();
-
-            String calMoneyText = String.format("%.2f", calSpentOil);
-            double calMoneyDouble = Double.parseDouble(calMoneyText);
-
-            textCalDis.setText(decimalFormatText(distanceDouble) + " km.");
-            textCalDu.setText(durationTextIntent);
+            textCalDistance.setText(distanceText);
+            textCalDuration.setText(durationText);
             startTextLocation.setText(startLocation);
             endTextLocation.setText(endLocation);
-            textNameCar.setText(spinType.getSelectedItem().toString());
-            textTypeCar.setText(spinType2.getSelectedItem().toString());
-            textTypeOil.setText(spinOil.getSelectedItem().toString() + " (" + oil_price_search + " บาท)");
+            textNameCar.setText(spinTypeCar.getSelectedItem().toString());
+            textTypeCar.setText(spinTypeBrand.getSelectedItem().toString());
+            textTypeOil.setText(spinTypeOil.getSelectedItem().toString() + " (" + edtOilPrice.getText().toString() + " บาท)");
             calOil.setText(String.format("%.2f", calAmountOil) + " L.");
-            calMoney.setText(decimalFormatText(calMoneyDouble) + " บาท");
+            calMoney.setText(decimalFormatText(calSpendOil) + " บาท");
 
-            average_baht.setText(String.format("%.2f", calSpentOil / distanceInDouble) + " บาท ต่อ 1 km.");
-            str_average_baht = average_baht.getText().toString();
+            averageBaht.setText(String.format("%.2f", calSpendOil / distance) + " บาท ต่อ 1 km.");
 
-            edt_oil_price.onEditorAction(EditorInfo.IME_ACTION_DONE);
+            edtOilPrice.onEditorAction(EditorInfo.IME_ACTION_DONE);
         }
     }
 
@@ -216,36 +189,41 @@ public class CalculateOilFragment extends Fragment implements AdapterView.OnItem
         return adapterType;
     }
 
-    private void bindView() {
-        spinType = (Spinner) getActivity().findViewById(R.id.spinTpye);
-        spinOil = (Spinner) getActivity().findViewById(R.id.spinOil);
-        spinType2 = (Spinner) getActivity().findViewById(R.id.spinType2);
+    public void bindView() {
+        spinTypeCar = (Spinner) getActivity().findViewById(R.id.spinTpye);
+        spinTypeOil = (Spinner) getActivity().findViewById(R.id.spinOil);
+        spinTypeBrand = (Spinner) getActivity().findViewById(R.id.spinType2);
 
         relativeLayout = (RelativeLayout) getActivity().findViewById(R.id.relativeOil2);
-        relative_text_save = (RelativeLayout) getActivity().findViewById(R.id.relative_text_save);
+        relativeTextSave = (RelativeLayout) getActivity().findViewById(R.id.relative_text_save);
 
         radioTown = (RadioButton) getActivity().findViewById(R.id.radioTown);
         radioCountrySide = (RadioButton) getActivity().findViewById(R.id.radopCountrySide);
         radioCombined = (RadioButton) getActivity().findViewById(R.id.radioCombined);
 
-        btncal = (Button) getActivity().findViewById(R.id.btncal);
+        btnCalculate = (Button) getActivity().findViewById(R.id.btncal);
 
         textTypeOil = (TextView) getActivity().findViewById(R.id.textTypeOil);
-        textCalDis = (TextView) getActivity().findViewById(R.id.distanceTextOil);
-        textCalDu = (TextView) getActivity().findViewById(R.id.durationTextOil);
+        textCalDistance = (TextView) getActivity().findViewById(R.id.distanceTextOil);
+        textCalDuration = (TextView) getActivity().findViewById(R.id.durationTextOil);
         startTextLocation = (TextView) getActivity().findViewById(R.id.startTextLocation);
         endTextLocation = (TextView) getActivity().findViewById(R.id.endTextLocation);
         textNameCar = (TextView) getActivity().findViewById(R.id.textNameCar);
         calOil = (TextView) getActivity().findViewById(R.id.calOil);
         calMoney = (TextView) getActivity().findViewById(R.id.calMoney);
         textTypeCar = (TextView) getActivity().findViewById(R.id.textTypeCar);
+        averageBaht = (TextView) getActivity().findViewById(R.id.average);
+        textSave = (TextView) getActivity().findViewById(R.id.textSave);
 
-        average_baht = (TextView) getActivity().findViewById(R.id.average);
+        edtOilPrice = (EditText) getActivity().findViewById(R.id.edt_oil_price);
 
-        edt_oil_price = (EditText) getActivity().findViewById(R.id.edt_oil_price);
-        image_search_oil_price = (ImageView) getActivity().findViewById(R.id.image_search_oil_price);
+        imageSearchOilPrice = (ImageView) getActivity().findViewById(R.id.image_search_oil_price);
+    }
 
-        textsave = (TextView) getActivity().findViewById(R.id.textSave);
+    public String getDateCurrent() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        simpleDateFormat.setTimeZone(TimeZone.getTimeZone("UTC+7"));
+        return strDate = simpleDateFormat.format(new Date());
     }
 
     public Intent intentOilPrice(Context context) {
@@ -259,20 +237,19 @@ public class CalculateOilFragment extends Fragment implements AdapterView.OnItem
 
     public void carTypeNull() {
         final ArrayAdapter<String> adapterTypeNull = new ArrayAdapter<String>(getActivity(),
-                android.R.layout.simple_spinner_item, type_null);
+                android.R.layout.simple_spinner_item, typeNull);
         adapterTypeNull.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        if (spinType.getSelectedItemPosition() == 0) {
-            spinType2.setAdapter(adapterTypeNull);
+        if (spinTypeCar.getSelectedItemPosition() == 0) {
+            spinTypeBrand.setAdapter(adapterTypeNull);
         }
     }
 
     public void checkData() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AlertDialogStyle);
-        if (textNameCar.getText().equals("")) {
+        if (textNameCar.getText().toString().equals("")) {
             Toast.makeText(getActivity(), "กรุณาใส่ข้อมูลให้ครบ", Toast.LENGTH_SHORT).show();
             return;
         } else {
-
             builder.setTitle("บันทึกข้อมูล")
                     .setMessage("คุณต้องการบันทึกข้อมูลนี้หรือไม่?")
                     .setCancelable(false)
@@ -293,7 +270,6 @@ public class CalculateOilFragment extends Fragment implements AdapterView.OnItem
                     fragmentTransaction.replace(R.id.fragment_continer, historyFragment);
                     fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commit();
-
                 }
             });
             AlertDialog alertDialog = builder.create();
@@ -302,138 +278,110 @@ public class CalculateOilFragment extends Fragment implements AdapterView.OnItem
     }
 
     public void selectTypeCar() {
-        switch ((int) spinType.getSelectedItemId()) {
+        switch ((int) spinTypeCar.getSelectedItemId()) {
             case 0:
                 carTypeNull();
                 break;
-
             case 1:
-                showAdapterTypeCar(detailCar.bmw);
+                showAdapterTypeBrand(detailCar.bmw);
                 break;
-
             case 2:
-                showAdapterTypeCar(detailCar.chevrolet);
+                showAdapterTypeBrand(detailCar.chevrolet);
                 break;
-
             case 3:
-                showAdapterTypeCar(detailCar.ford);
+                showAdapterTypeBrand(detailCar.ford);
                 break;
-
             case 4:
-                showAdapterTypeCar(detailCar.foton);
+                showAdapterTypeBrand(detailCar.foton);
                 break;
-
             case 5:
-                showAdapterTypeCar(detailCar.honda);
+                showAdapterTypeBrand(detailCar.honda);
                 break;
-
             case 6:
-                showAdapterTypeCar(detailCar.isuzu);
+                showAdapterTypeBrand(detailCar.isuzu);
                 break;
-
             case 7:
-                showAdapterTypeCar(detailCar.mazda);
+                showAdapterTypeBrand(detailCar.mazda);
                 break;
-
             case 8:
-                showAdapterTypeCar(detailCar.mercedes_benz);
+                showAdapterTypeBrand(detailCar.mercedes_benz);
                 break;
-
             case 9:
-                showAdapterTypeCar(detailCar.mg);
+                showAdapterTypeBrand(detailCar.mg);
                 break;
-
             case 10:
-                showAdapterTypeCar(detailCar.mini);
+                showAdapterTypeBrand(detailCar.mini);
                 break;
-
             case 11:
-                showAdapterTypeCar(detailCar.mitsubishi);
+                showAdapterTypeBrand(detailCar.mitsubishi);
                 break;
-
             case 12:
-                showAdapterTypeCar(detailCar.nissan);
+                showAdapterTypeBrand(detailCar.nissan);
                 break;
-
             case 13:
-                showAdapterTypeCar(detailCar.suzuki);
+                showAdapterTypeBrand(detailCar.suzuki);
                 break;
-
             case 14:
-                showAdapterTypeCar(detailCar.tata);
+                showAdapterTypeBrand(detailCar.tata);
                 break;
-
             case 15:
-                showAdapterTypeCar(detailCar.toyota);
+                showAdapterTypeBrand(detailCar.toyota);
                 break;
         }
     }
 
-    public void showAdapterTypeCar(String[] car) {
+    public void showAdapterTypeBrand(String[] car) {
         ArrayAdapter<String> stringArrayAdapter = new ArrayAdapter<String>(getActivity(),
                 android.R.layout.simple_spinner_item, car);
         stringArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinType2.setAdapter(stringArrayAdapter);
+        spinTypeBrand.setAdapter(stringArrayAdapter);
     }
 
     public void checkTypeCar() {
-        switch ((int) spinType.getSelectedItemId()) {
+        point = spinTypeBrand.getSelectedItemPosition();
+        switch ((int) spinTypeCar.getSelectedItemId()) {
             case 1:
                 checkRadioButton(detailCar.bmw_town[point], detailCar.bmw_countryside[point], detailCar.bmw_combined[point]);
                 break;
-
             case 2:
                 checkRadioButton(detailCar.chevrolet_town[point], detailCar.chevrolet_countryside[point], detailCar.chevrolet_combined[point]);
                 break;
-
             case 3:
                 checkRadioButton(detailCar.ford_town[point], detailCar.ford_countryside[point], detailCar.ford_combined[point]);
                 break;
-
             case 4:
                 checkRadioButton(detailCar.foton_town[point], detailCar.foton_countryside[point], detailCar.foton_combined[point]);
                 break;
-
             case 5:
                 checkRadioButton(detailCar.honda_town[point], detailCar.honda_countryside[point], detailCar.honda_combined[point]);
                 break;
-
             case 6:
                 checkRadioButton(detailCar.isuzu_town[point], detailCar.isuzu_countryside[point], detailCar.isuzu_combined[point]);
                 break;
-
             case 7:
                 checkRadioButton(detailCar.mazda_town[point], detailCar.mazda_countryside[point], detailCar.mazda_combined[point]);
                 break;
-
             case 8:
                 checkRadioButton(detailCar.mercedes_benz_town[point], detailCar.mercedes_benz_countryside[point], detailCar.mercedes_benz_combined[point]);
                 break;
-
             case 9:
                 checkRadioButton(detailCar.mg_town[point], detailCar.mg_countryside[point], detailCar.mg_combined[point]);
                 break;
-
             case 10:
                 checkRadioButton(detailCar.mini_town[point], detailCar.mini_countryside[point], detailCar.mini_combined[point]);
                 break;
-
             case 11:
                 checkRadioButton(detailCar.mitsubishi_town[point], detailCar.mitsubishi_countryside[point], detailCar.mitsubishi_combined[point]);
                 break;
-
             case 12:
                 checkRadioButton(detailCar.nissan_town[point], detailCar.nissan_countryside[point], detailCar.nissan_combined[point]);
                 break;
-
             case 13:
                 checkRadioButton(detailCar.suzuki_town[point], detailCar.suzuki_countryside[point], detailCar.suzuki_combined[point]);
                 break;
-
             case 14:
                 checkRadioButton(detailCar.tata_town[point], detailCar.tata_countryside[point], detailCar.tata_combined[point]);
                 break;
-
             case 15:
                 checkRadioButton(detailCar.toyota_town[point], detailCar.toyota_countryside[point], detailCar.toyota_combined[point]);
                 break;
@@ -442,34 +390,26 @@ public class CalculateOilFragment extends Fragment implements AdapterView.OnItem
 
     public void checkRadioButton(double town, double countryside, double combine) {
         if (radioTown.isChecked()) {
-            calAmountOil = distanceInDouble / town;
+            calAmountOil = distance / town;
         } else if (radioCountrySide.isChecked()) {
-            calAmountOil = distanceInDouble / countryside;
+            calAmountOil = distance / countryside;
         } else if (radioCombined.isChecked()) {
-            calAmountOil = distanceInDouble / combine;
+            calAmountOil = distance / combine;
         }
     }
 
-    public void checkPriceOil() {
-        distanceInDouble = Double.parseDouble(distanceText);
-        point = spinType2.getSelectedItemPosition();
-        priceOil(oil_price_search);
-    }
-
-    public Double priceOil(Double price) {
+    public void priceOil(Double price) {
         checkTypeCar();
-        String strCalAmountOil = String.format("%.2f", calAmountOil);
-        calSpentOil = Double.parseDouble(strCalAmountOil) * price;
-        return calSpentOil;
+        calSpendOil = Double.parseDouble(String.format("%.2f", calAmountOil * price));
     }
 
     private void saveData() {
         final DatabaseOil databaseOil = new DatabaseOil(getActivity());
-
-        long save = databaseOil.insertData(textNameCar.getText().toString(), textTypeCar.getText().toString(), startTextLocation.getText().toString(), endTextLocation.getText().toString(), textCalDis.getText().toString()
-                , textCalDu.getText().toString(), textTypeOil.getText().toString(), calOil.getText().toString(), calMoney.getText().toString(), str_date, str_average_baht);
-        if (save <= 0) {
-
+        try {
+            databaseOil.insertData(textNameCar.getText().toString(), textTypeCar.getText().toString(), startTextLocation.getText().toString(), endTextLocation.getText().toString(), textCalDistance.getText().toString()
+                    , textCalDuration.getText().toString(), textTypeOil.getText().toString(), calOil.getText().toString(), calMoney.getText().toString(), getDateCurrent(), averageBaht.getText().toString());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

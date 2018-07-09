@@ -15,8 +15,8 @@ import android.widget.ImageView;
 
 public class EcoStickerFragment extends Fragment {
 
-    Button btn_eco_sticker;
-    ImageView imgCargif;
+    private Button btnEcoSticker;
+    private ImageView imgCargif;
 
     @Nullable
     @Override
@@ -31,22 +31,20 @@ public class EcoStickerFragment extends Fragment {
 
         bindView();
 
-        btn_eco_sticker.setOnClickListener(new View.OnClickListener() {
+        btnEcoSticker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = intentEcoSticker(getActivity());
-                startActivity(intent);
+                startActivity(new Intent(intentEcoSticker(getActivity())));
             }
         });
 
         imgCargif.setBackgroundResource(R.drawable.cargif);
         AnimationDrawable animationDrawable = (AnimationDrawable) imgCargif.getBackground();
         animationDrawable.start();
-
     }
 
     private void bindView() {
-        btn_eco_sticker = (Button) getActivity().findViewById(R.id.btn_eco_sticker);
+        btnEcoSticker = (Button) getActivity().findViewById(R.id.btn_eco_sticker);
         imgCargif = (ImageView) getActivity().findViewById(R.id.ImgCargif);
     }
 
