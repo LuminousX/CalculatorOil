@@ -1,4 +1,4 @@
-package com.example.hispeed.calculatoroil.Models;
+package com.example.hispeed.calculatoroil.Databases;
 
 import android.content.ContentValues;
 import android.content.Context;

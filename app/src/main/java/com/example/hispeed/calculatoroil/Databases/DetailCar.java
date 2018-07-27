@@ -1,6 +1,4 @@
-package com.example.hispeed.calculatoroil.Models;
-
-import android.support.v7.app.AppCompatActivity;
+package com.example.hispeed.calculatoroil.Databases;
 
 /**
  * Created by Hispeed on 26/7/2560.

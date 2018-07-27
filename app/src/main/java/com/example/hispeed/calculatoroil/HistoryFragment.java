@@ -12,18 +12,15 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.hispeed.calculatoroil.Adapter.AdapterRecyclerView;
-import com.example.hispeed.calculatoroil.Models.DatabaseOil;
-import com.example.hispeed.calculatoroil.Models.DetailRecyclerView;
-import com.example.hispeed.calculatoroil.Models.RecyclerTouchListener;
-import com.example.hispeed.calculatoroil.ViewHolders.ClickListener;
+import com.example.hispeed.calculatoroil.Adapter.RecyclerViewAdapter;
+import com.example.hispeed.calculatoroil.Databases.DatabaseOil;
+import com.example.hispeed.calculatoroil.Adapter.DetailRecyclerView;
 
 import java.util.ArrayList;
 
@@ -41,7 +38,7 @@ public class HistoryFragment extends Fragment implements NavigationView.OnNaviga
     private TextView textNoHistory;
 
     private RecyclerView recyclerView;
-    private AdapterRecyclerView adapterRecyclerView;
+    private RecyclerViewAdapter recyclerViewAdapter;
     private ArrayList<DetailRecyclerView> detailRecyclerViews = new ArrayList<>();
 
     @Override
@@ -65,7 +62,7 @@ public class HistoryFragment extends Fragment implements NavigationView.OnNaviga
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        adapterRecyclerView = new AdapterRecyclerView(getActivity(), detailRecyclerViews);
+        recyclerViewAdapter = new RecyclerViewAdapter(getActivity(), detailRecyclerViews);
 
         retrieve();
 
@@ -111,7 +108,7 @@ public class HistoryFragment extends Fragment implements NavigationView.OnNaviga
 
                                 int position = viewHolder.getAdapterPosition();
                                 detailRecyclerViews.remove(position);
-                                adapterRecyclerView.notifyDataSetChanged();
+                                recyclerViewAdapter.notifyDataSetChanged();
 
                                 if (detailRecyclerViews.size() < 1) {
                                     textNoHistory.setVisibility(View.VISIBLE);
@@ -124,7 +121,7 @@ public class HistoryFragment extends Fragment implements NavigationView.OnNaviga
                                 dialog.dismiss();
 
                                 final int position = viewHolder.getAdapterPosition();
-                                adapterRecyclerView.notifyItemChanged(position);
+                                recyclerViewAdapter.notifyItemChanged(position);
                             }
                         });
                 AlertDialog dialog = builder.create();
@@ -182,7 +179,7 @@ public class HistoryFragment extends Fragment implements NavigationView.OnNaviga
             cursor.moveToNext();
         }
         if (!(detailRecyclerViews.size() < 1)) {
-            recyclerView.setAdapter(adapterRecyclerView);
+            recyclerView.setAdapter(recyclerViewAdapter);
         }
 
       //  cursor.close();

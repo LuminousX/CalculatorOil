@@ -39,7 +39,7 @@ import android.widget.Toast;
 
 import com.example.hispeed.calculatoroil.ConnectApi.DirectionFinderRetrofit;
 import com.example.hispeed.calculatoroil.ConnectApi.RoutesValue;
-import com.example.hispeed.calculatoroil.Models.DirectionFinderListener;
+import com.example.hispeed.calculatoroil.ConnectApi.DirectionFinderListener;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationAvailability;

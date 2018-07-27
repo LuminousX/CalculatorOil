@@ -1,4 +1,4 @@
-package com.example.hispeed.calculatoroil.Models;
+package com.example.hispeed.calculatoroil.Adapter;
 
 /**
  * Created by Hispeed on 20/8/2560.

@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.transition.TransitionInflater;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,8 +28,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.hispeed.calculatoroil.Models.DatabaseOil;
-import com.example.hispeed.calculatoroil.Models.DetailCar;
+import com.example.hispeed.calculatoroil.Databases.DatabaseOil;
+import com.example.hispeed.calculatoroil.Databases.DetailCar;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;

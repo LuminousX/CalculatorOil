@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.hispeed.calculatoroil.Models.DetailRecyclerView;
 import com.example.hispeed.calculatoroil.R;
 import com.example.hispeed.calculatoroil.ViewHolders.DetailVewHolders;
 
@@ -16,7 +15,7 @@ import java.util.ArrayList;
  * Created by Hispeed on 20/8/2560.
  */
 
-public class AdapterRecyclerView extends RecyclerView.Adapter<DetailVewHolders> {
+public class RecyclerViewAdapter extends RecyclerView.Adapter<DetailVewHolders> {
 
     Context context;
     ArrayList<DetailRecyclerView> detailRecyclerViews = new ArrayList<>();
@@ -24,7 +23,7 @@ public class AdapterRecyclerView extends RecyclerView.Adapter<DetailVewHolders> 
     View view;
     DetailVewHolders detailVewHolders;
 
-    public AdapterRecyclerView(Context context, ArrayList<DetailRecyclerView> detailRecyclerViews) {
+    public RecyclerViewAdapter(Context context, ArrayList<DetailRecyclerView> detailRecyclerViews) {
         this.context = context;
         this.detailRecyclerViews = detailRecyclerViews;
         notifyItemRangeChanged(0, detailRecyclerViews.size());

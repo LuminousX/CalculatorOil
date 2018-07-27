@@ -1,9 +1,6 @@
 package com.example.hispeed.calculatoroil.ConnectApi;
 
-import android.util.Log;
-
 import com.example.hispeed.calculatoroil.ConnectApi.addressLocation.AddressLocation;
-import com.example.hispeed.calculatoroil.Models.DirectionFinderListener;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;

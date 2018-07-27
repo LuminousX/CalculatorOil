@@ -1,12 +1,10 @@
-package com.example.hispeed.calculatoroil.Models;
+package com.example.hispeed.calculatoroil.Adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
-
-import com.example.hispeed.calculatoroil.ViewHolders.ClickListener;
 
 /**
  * Created by Hispeed on 21/8/2560.

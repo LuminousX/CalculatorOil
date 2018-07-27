@@ -1,4 +1,4 @@
-package com.example.hispeed.calculatoroil.ViewHolders;
+package com.example.hispeed.calculatoroil.Adapter;
 
 import android.view.View;
 

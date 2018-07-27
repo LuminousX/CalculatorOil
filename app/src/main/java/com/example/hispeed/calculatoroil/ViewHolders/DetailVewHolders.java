@@ -5,7 +5,8 @@ import android.view.GestureDetector;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.hispeed.calculatoroil.Models.DetailRecyclerView;
+import com.example.hispeed.calculatoroil.Adapter.ClickListener;
+import com.example.hispeed.calculatoroil.Adapter.DetailRecyclerView;
 import com.example.hispeed.calculatoroil.R;
 
 import java.util.ArrayList;
